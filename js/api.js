@@ -36,9 +36,17 @@ const subRegiaoParaIngles = {
     'Polinésia': 'Polynesia'
 };
 
+const regiaoParaPortugues = Object.fromEntries(
+    Object.entries(regiaoParaIngles).map(([pt, en]) => [en, pt])
+);
+
+const subRegiaoParaPortugues = Object.fromEntries(
+    Object.entries(subRegiaoParaIngles).map(([pt, en]) => [en, pt])
+);
+
 // carregar a api
 const carregarAPI = () => {
-    fetch('https://restcountries.com/v3.1/all')
+    fetch('https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,population,area,flags,translations')
     .then(res => res.json())
     .then(data => { 
         paisesDataOriginal = data; // armazena a lista original
@@ -65,7 +73,7 @@ const getPais = (pais) => {
         <img src="${pais.flags.png}">
         <h2>${pais.name.common}</h2>
         <h3>CAPITAL: ${pais.capital}</h3>
-        <h3>REGIÃO: ${pais.region}</h3>
+        <h3>REGIÃO: ${regiaoParaPortugues[pais.region] || pais.region}</h3>
         <p><b>Clique para mais informações</b></p>
         </div>
     `

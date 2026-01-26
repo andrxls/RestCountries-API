@@ -1,7 +1,5 @@
 # Procure o País
 
------ A API não se encontra funcionando faz alguns meses -----
-
 Chamado simplesmente de Procure o País, este projeto é de uma aplicação que consome a API RestCountries e mostra todos os países e territórios do mundo e alguns de seus detalhes.
 
 O layout foi feito de modo que fosse simples e não fugisse da principal função: procurar países, filtra-los, ordena-los e mostrar mais detalhes. Por isso, foi utilizado um scroll infinito para mostrar todos os países sem a necessidade de clicar em botões para modificar a página.

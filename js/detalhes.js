@@ -9,6 +9,38 @@ const carregarDetalhesPais = (paisNome) => {
     .then(data => mostrarDetalhesPais(data[0]));
 }
 
+const regiao = {
+    'Africa': 'África',
+    'Americas': 'Américas',
+    'Asia': 'Ásia',
+    'Europe': 'Europa'
+};
+
+const subRegiao = {
+    'Middle Africa': 'África Central',
+    'Western Africa': 'África Ocidental',
+    'Eastern Africa': 'África Oriental',
+    'Northern Africa': 'África Setentrional',
+    'Southern Africa': 'África Austral',
+    'North America': 'América do Norte',
+    'Central America': 'América Central',
+    'South America': 'América do Sul',
+    'Caribbean': 'Caribe',
+    'Central Asia': 'Ásia Central',
+    'Eastern Asia': 'Ásia Oriental',
+    'South-Eastern Asia': 'Sudeste Asiático',
+    'Southern Asia': 'Sul da Ásia',
+    'Western Asia': 'Oeste da Ásia',
+    'Northern Europe': 'Europa Setentrional',
+    'Western Europe': 'Europa Ocidental',
+    'Southern Europe': 'Europa Meridional',
+    'Eastern Europe': 'Europa Oriental',
+    'Australia and New Zealand': 'Austrália e N. Zelândia',
+    'Melanesia': 'Melanésia',
+    'Micronesia': 'Micronésia',
+    'Polynesia': 'Polinésia'
+};
+
 // exibir os detalhes do país
 const mostrarDetalhesPais = (pais) => {
     document.title = `Procure o País - ${pais.name.common}`; // colocar o nome do país no título da página
@@ -18,9 +50,10 @@ const mostrarDetalhesPais = (pais) => {
         <p></p>
         <img src="${pais.flags.png}">
         <p></p>
+        <h3>Nome em português: ${pais.translations.por.common}</h3>
         <h3>Capital: ${pais.capital}</h3>
-        <h3>Região: ${pais.region}</h3>
-        <h3>Sub-região: ${pais.subregion ? pais.subregion : 'Não disponível'}</h3>
+        <h3>Região: ${regiao[pais.region] || pais.region}</h3>
+        <h3>Sub-região: ${(subRegiao[pais.subregion] || pais.subregion) || 'Não disponível'}</h3>
         <h3>População: ${pais.population ? pais.population : 'Não disponível'}</h3>
         <h3>Área: ${pais.area} km²</h3>
         <h3>Idiomas falados: ${Object.values(pais.languages).join(', ')}</h3>
