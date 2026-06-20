@@ -62,13 +62,13 @@ const mostrarDetalhesPais = (pais) => {
         <img src="${pais.flag.url_png}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/616/616616.png'" alt="${pais.names.common}">
         <p></p>
         <h3>Nome em português: ${pais.names.translations.por.common}</h3>
-        <h3>Capital: ${pais.capitals?.[0]?.name}</h3>
+        <h3>Capital: ${pais.capitals?.[0]?.name || 'Não disponível'}</h3>
         <h3>Região: ${regiao[pais.region] || pais.region}</h3>
         <h3>Sub-região: ${(subRegiao[pais.subregion] || pais.subregion) || 'Não disponível'}</h3>
         <h3>População: ${pais.population ? pais.population : 'Não disponível'}</h3>
         <h3>Área: ${pais.area.kilometers} km²</h3>
-        <h3>Idioma oficial: ${pais.languages?.[0].name}</h3>
-        <h3>Moeda:${Object.values(pais.currencies)[0]?.name}</h3>
+        <h3>Idioma oficial: ${pais.languages?.[0]?.name || 'Não disponível'}</h3>
+        <h3>Moeda:${Object.values(pais.currencies)[0]?.name || 'Não disponível'}</h3>
         <h3>Fuso horário: ${pais.timezones?.join(', ')}</h3>
         <h3>Domínio de internet: ${pais.tlds?.[0]}</h3>
         <h3>Código de discagem: ${pais.calling_codes?.[0]}</h3>
