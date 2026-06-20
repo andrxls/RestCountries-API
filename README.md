@@ -34,7 +34,7 @@ O layout prioriza a função principal: encontrar países, filtrá-los, ordená-
   - População (crescente ou decrescente)
   - Área (crescente ou decrescente)
 - 🏷️ **Filtro ativo visível** — o botão principal exibe qual filtro ou ordenação está em uso
-- 📄 **Página de detalhes** — ao clicar em um país, o usuário é redirecionado para uma página com informações adicionais
+- 📄 **Página de detalhes** — ao clicar em um país, o usuário é redirecionado para uma página com informações adicionais, incluindo sua localização no mapa
 - ♻️ **Botão Resetar** — limpa busca, filtros e ordenação de uma vez
 
 ---

@@ -1,18 +1,14 @@
-// extrair o nome do país da URL
 const params = new URLSearchParams(window.location.search);
 const paisNome = params.get('pais');
 
-// buscar os detalhes do país
 let paisesDataOriginal = [];
 
 const carregarDetalhesPais = async (paisNome) => {
     const res = await fetch('./data/countries.json');
     const data = await res.json();
-
     paisesDataOriginal = data;
 
     const nomeFormatado = decodeURIComponent(paisNome);
-
     const pais = paisesDataOriginal.find(p =>
         p.names.common.toLowerCase() === nomeFormatado.toLowerCase()
     );
@@ -52,13 +48,10 @@ const subRegiao = {
     'Polynesia': 'Polinésia'
 };
 
-// exibir os detalhes do país
 const mostrarDetalhesPais = (pais) => {
     document.title = `Procure o País - ${pais.names.common}`; // colocar o nome do país no título da página
     const detalhesContainer = document.getElementById('pais-detalhes');
     detalhesContainer.innerHTML = `
-        <h4>${pais.names.common}</h4>
-        <p></p>
         <img src="${pais.flag.url_png}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/616/616616.png'" alt="${pais.names.common}">
         <p></p>
         <h3>Nome em português: ${pais.names.translations.por.common}</h3>
@@ -74,12 +67,36 @@ const mostrarDetalhesPais = (pais) => {
         <h3>Código de discagem: ${pais.calling_codes?.[0]}</h3>
         <p><b>Clique aqui para voltar</b></p>
     `;
-}
 
-// função para carregar os detalhes do país
-carregarDetalhesPais(paisNome);
+    const lat = pais.coordinates?.lat;
+    const lng = pais.coordinates?.lng;
 
-// botão de voltar para a home
+    if (lat !== undefined && lng !== undefined) {
+        setTimeout(() => {
+            const mapa = L.map('mapa-pais', {
+                center: [lat, lng],
+                zoom: 4,
+                zoomControl: true,
+                scrollWheelZoom: true
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                maxZoom: 18
+            }).addTo(mapa);
+
+            L.marker([lat, lng])
+                .addTo(mapa)
+                .bindPopup(`<b>${pais.names.common}</b>`)
+                .openPopup();
+        }, 50);
+    } else {
+        document.getElementById('mapa-pais').style.display = 'none';
+    }
+};
+
 const voltar = () => {
     window.history.back();
-}
+};
+
+carregarDetalhesPais(paisNome);

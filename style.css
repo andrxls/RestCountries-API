@@ -312,13 +312,68 @@ h1 {
 
 /* === CARD DE DETALHES === */
 .caixa-pais2 {
+    display: flex;
+    align-items: stretch;
     background: #ffffff;
     border: 0.5px solid #e0e0d8;
     border-radius: 16px;
     overflow: hidden;
-    max-width: 460px;
+    max-width: 900px;
     margin: 24px auto;
     cursor: pointer;
+}
+
+#pais-detalhes {
+    flex: 1;
+    min-width: 0;
+}
+
+#pais-detalhes img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 0.5px solid #f0ede8;
+}
+
+#pais-detalhes h4 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    padding: 20px 24px 4px;
+    text-align: left;
+}
+
+#pais-detalhes h3 {
+    font-size: 13px;
+    font-weight: 400;
+    color: #333;
+    border: none;
+    border-bottom: 0.5px solid #f5f5f0;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    margin: 0;
+}
+
+#pais-detalhes h3:last-child {
+    border-bottom: none;
+    padding-bottom: 20px;
+}
+
+#pais-detalhes p {
+    padding: 14px 24px;
+    font-size: 13px;
+    color: #888;
+}
+
+#mapa-pais {
+    width: 380px;
+    flex-shrink: 0;
+    border-left: 0.5px solid #f0ede8;
+    min-height: 400px;
 }
 
 .caixa-pais2 img {
@@ -387,10 +442,6 @@ h2.vazio {
     padding: 48px 0;
 }
 
-/* === IMAGEM ERRO === */
-
-
-
 /* === RESPONSIVO === */
 @media (max-width: 1200px) {
     .paises {
@@ -450,5 +501,20 @@ h2.vazio {
     }
     .dropdown-content .dropdown > button::after {
         content: '';
+    }
+}
+
+@media (max-width: 700px) {
+    .caixa-pais2 {
+        flex-direction: column;
+        margin: 16px;
+        max-width: 100%;
+    }
+
+    #mapa-pais {
+        width: 100%;
+        border-left: none;
+        border-top: 0.5px solid #f0ede8;
+        min-height: 260px;
     }
 }
