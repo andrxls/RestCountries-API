@@ -53,7 +53,7 @@ const mostrarDetalhesPais = (pais) => {
     const detalhesContainer = document.getElementById('pais-detalhes');
     detalhesContainer.innerHTML = `
         <img src="${pais.flag.url_png}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/616/616616.png'" alt="${pais.names.common}">
-        <p></p>
+        <h4>${pais.names.common}</h4>
         <h3>Nome em português: ${pais.names.translations.por.common}</h3>
         <h3>Capital: ${pais.capitals?.[0]?.name || 'Não disponível'}</h3>
         <h3>Região: ${regiao[pais.region] || pais.region}</h3>
