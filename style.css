@@ -1,261 +1,452 @@
-/* configuração de corpo */
-body {
+/* === RESET & BASE === */
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 8pt;
-    text-align: center;
-    background-color: white;
 }
 
-/* configuração da header */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    background-color: #f5f5f0;
+    color: #1a1a1a;
+}
+
+/* === HEADER === */
 .header {
     position: sticky;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    height: 66px;
-    background: white;
-    border-bottom: 1px solid rgb(226, 226, 226);
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    border-bottom: 0.5px solid #e0e0d8;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
 }
 
-/* configuração de headlines */
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
+
 h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 30pt;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #1a1a1a;
     text-align: center;
-    margin: 0 auto;
-    padding-top: 10px;
 }
 
-h2 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 12pt;
-    margin: 0 auto;
-    padding: 5px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-h3 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
-    text-align: left;
-    border-bottom: 1px solid rgb(226, 226, 226);
-    margin: 0 auto;
-    padding: 8px;
-}
-
-h4 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20pt;
-    text-align: center;
-    margin: 0 auto;
-}
-
-/* configuração do espaço geral, do espaço da caixa dos países, detalhes do país e das imagens contidas */
-.paises {
-    max-width: 1200px;
-    margin: 20px auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-}
-.caixa-pais {
-    background: white;
-    border: 1px solid rgb(210, 211, 212);
-    border-radius: 10px;
-    padding: 10px;
-    cursor: pointer;
-}
-.caixa-pais2 {
-    background: white;
-    border: 1px solid rgb(210, 211, 212);
-    border-radius: 10px;
-    margin: 20px auto;
-    width: 400px;
-    height: flex;
-    cursor: pointer;
-    padding: 10px 30px 10px 30px;
-}
-.paises img {
-    width: 100%;
-    height: 160px;
-}
-
-/* configuração da navegação */
+/* === NAV === */
 .nav {
     position: sticky;
-    top: 67px;
-    left: 0px;
-    right: 0px;
-    height: 33px;
-    background: white;
-    border-bottom: 1px solid rgb(210, 211, 212);
-    transition: 0.3s;
-}
-
-.nav button {
-    width: 160px;
-    height: 32px;
-    font-weight: bold;
-    font-size: 9pt;
-    border: 0px;
-    background: white;
-}
-
-.nav button:hover {
-    cursor:pointer;
-    background: black;
-    color: white;
+    top: 64px;
+    z-index: 99;
+    background: #ffffff;
+    border-bottom: 0.5px solid #e0e0d8;
+    height: auto;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 24px;
+    flex-wrap: wrap;
 }
 
 .nav input {
-    background: url("https://icon-library.com/images/search-icon-html/search-icon-html-2.jpg") no-repeat;
-    background-size: 15px 15px;
-    background-position: 7px center;
     width: 200px;
-    height: 30px;
-    border: 0px;
-    padding: 0px 10px 0px 30px;
+    height: 34px;
+    border: 0.5px solid #ccc;
+    border-radius: 8px;
+    padding: 0 12px 0 34px;
+    font-size: 13px;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 10px center;
+    outline: none;
+    transition: border-color 0.15s;
 }
 
-/* configuração dos menus dropdown */
-/* PRIMEIRO DROP */
+.nav input:focus {
+    border-color: #888;
+}
+
+.nav button {
+    height: 34px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 0.5px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    color: #444;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+}
+
+.nav button:hover {
+    background: #1a1a1a;
+    color: #fff;
+    border-color: #1a1a1a;
+}
+
+/* === DROPDOWN === */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
+/* top:100% sem gap, padding-top cria a ponte invisível */
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: white;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding-top: 6px;
+    z-index: 200;
+    min-width: 160px;
+}
+
+.dropdown:hover > .dropdown-content {
+    display: block;
+}
+
+.dropdown-content-inner {
+    display: block;
+    min-width: 160px;
+    background: #fff;
+    border: 0.5px solid #e0e0d8;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+}
+
+/* Dropdowns dentro de menus devem ser block e ocupar largura total */
+.dropdown-content-inner > .dropdown {
+    display: block;
+    width: 100%;
+}
+
+.dropdown-content-inner > .dropdown > button {
+    width: 100%;
 }
 
 .dropdown-content button {
-    font-size: 8pt;
-    padding: 10px 16px;
-    text-decoration: none;
     display: block;
-    width: 160px;
+    width: 100%;
+    height: auto;
+    padding: 9px 14px;
+    text-align: left;
+    font-size: 13px;
     border: none;
-    background: none;
-    cursor: pointer;
+    border-radius: 0;
+    background: transparent;
+    color: #333;
+    border-bottom: 0.5px solid #f0ede8;
+    position: relative;
+    white-space: nowrap;
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
+.dropdown-content-inner > button:first-child,
+.dropdown-content-inner > .dropdown:first-child > button {
+    border-radius: 10px 10px 0 0;
 }
 
-/* SEGUNDO DROP */
-.dropdown-content .sub-dropdown {
+.dropdown-content-inner > button:last-child,
+.dropdown-content-inner > .dropdown:last-child > button {
+    border-bottom: none;
+    border-radius: 0 0 10px 10px;
+}
+
+/* Único item: arredonda tudo */
+.dropdown-content-inner > button:only-child,
+.dropdown-content-inner > .dropdown:only-child > button {
+    border-radius: 10px;
+    border-bottom: none;
+}
+
+.dropdown-content button:hover {
+    background: #f5f5f0;
+    color: #1a1a1a;
+    border-color: #f0ede8;
+}
+
+/* Sub-dropdown — ponte lateral */
+.sub-dropdown {
     display: none;
-    position: absolute;
-    left: 160px;
-    top: 0;
-}
-
-.dropdown:hover .sub-dropdown {
-    display: none;
-}
-
-.dropdown button:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content .dropdown:hover .sub-dropdown {
-    display: block;
-    left: 160px;
-}
-
-/* TERCEIRO DROP */
-.third-dropdown {
     position: absolute;
     left: 100%;
     top: 0;
-    display: none;
+    padding-left: 6px;
+    min-width: 160px;
+    z-index: 201;
 }
 
-/* exibe o terceiro  dropdown somente quando o mouse está sobre o segundo nível */
+.dropdown-content .dropdown:hover > .sub-dropdown {
+    display: block;
+}
+
+.sub-dropdown > .dropdown-content-inner > .dropdown {
+    display: block;
+}
+
+/* Terceiro nível */
+.third-dropdown {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    padding-left: 6px;
+    min-width: 160px;
+    z-index: 202;
+}
+
 .sub-dropdown .dropdown:hover > .third-dropdown {
     display: block;
 }
 
-/* oculta o terceiro nível quando não está em hover */
-.sub-dropdown .dropdown > .third-dropdown {
-    display: none;
+/* Caixa visual dos submenus */
+.sub-dropdown > .dropdown-content-inner,
+.third-dropdown > .dropdown-content-inner {
+    display: block;
+    min-width: 160px;
+    background: #fff;
+    border: 0.5px solid #e0e0d8;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
 }
 
-/* coloca uma seta para o lado caso exista mais opções no dropdown */
+/* Dropdowns dentro de menus devem ser block e ocupar largura total */
+.dropdown-content-inner > .dropdown {
+    display: block;
+    width: 100%;
+}
+
+.dropdown-content-inner > .dropdown > button {
+    width: 100%;
+}
+
+/* Seta indicativa de sub-menu */
 .dropdown-content .dropdown > button::after {
-    content: '▶';
+    content: '›';
     position: absolute;
-    right: 10px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 8pt;
-    opacity: 15%;
+    font-size: 16px;
+    color: #aaa;
 }
 
-/* configuração de telas */
+/* === GRID DE PAÍSES === */
+.paises {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 0 24px;
+}
 
-@media (max-width: 1250px) and (min-width: 951px) {
+/* === CARD DE PAÍS (lista) === */
+.caixa-pais {
+    background: #ffffff;
+    border: 0.5px solid #e0e0d8;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.caixa-pais:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+}
+
+.caixa-pais img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 0.5px solid #f0ede8;
+}
+
+.caixa-pais h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-align: left;
+    padding: 12px 14px 4px;
+}
+
+.caixa-pais h3 {
+    font-size: 12px;
+    font-weight: 400;
+    color: #666;
+    text-align: left;
+    border: none;
+    padding: 2px 14px;
+    margin: 0;
+}
+
+.caixa-pais p {
+    font-size: 11px;
+    color: #aaa;
+    text-align: left;
+    padding: 8px 14px 12px;
+    border-top: none;
+    margin-top: 4px;
+}
+
+/* === CARD DE DETALHES === */
+.caixa-pais2 {
+    background: #ffffff;
+    border: 0.5px solid #e0e0d8;
+    border-radius: 16px;
+    overflow: hidden;
+    max-width: 460px;
+    margin: 24px auto;
+    cursor: pointer;
+}
+
+.caixa-pais2 img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 0.5px solid #f0ede8;
+}
+
+/* Título da página de detalhes */
+.caixa-pais2 h4 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    padding: 20px 24px 4px;
+    text-align: left;
+}
+
+/* Linhas de info */
+.caixa-pais2 h3 {
+    font-size: 13px;
+    font-weight: 400;
+    color: #333;
+    border: none;
+    border-bottom: 0.5px solid #f5f5f0;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    margin: 0;
+}
+
+.caixa-pais2 h3:last-child {
+    border-bottom: none;
+    padding-bottom: 20px;
+}
+
+.caixa-pais2 p {
+    padding: 14px 24px;
+    font-size: 13px;
+    color: #888;
+}
+
+/* === BOTÃO VOLTAR === */
+.nav button[onclick="voltar()"] {
+    background: #fff;
+    color: #444;
+    border: 0.5px solid #ccc;
+}
+
+.nav button[onclick="voltar()"]:hover {
+    background: #1a1a1a;
+    color: #fff;
+    border-color: #1a1a1a;
+}
+
+/* === MENSAGEM VAZIA === */
+h2.vazio {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #aaa;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 48px 0;
+}
+
+/* === IMAGEM ERRO === */
+
+
+
+/* === RESPONSIVO === */
+@media (max-width: 1200px) {
     .paises {
-        max-width: 900px;
         grid-template-columns: repeat(3, 1fr);
+        max-width: 900px;
     }
 }
 
-@media (max-width: 950px) and (min-width: 651px) {
+@media (max-width: 900px) {
     .paises {
-        max-width: 600px;
         grid-template-columns: repeat(2, 1fr);
+        max-width: 600px;
     }
 }
 
-@media (max-width: 650px) and (min-width: 320px) {
+@media (max-width: 600px) {
     .paises {
-        max-width: 300px;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: 1fr;
+        max-width: 340px;
+        padding: 0 16px;
     }
+
     .caixa-pais2 {
-        background: white;
-        border: 1px solid rgb(210, 211, 212);
-        border-radius: 10px;
-        margin: 20px auto;
-        width: 220px;
-        height: flex;
-        cursor: pointer;
-        padding: 10px 30px 10px 30px;
+        margin: 16px;
+        max-width: 100%;
     }
-    .caixa-pais2 img {
-        width: 220px;
+
+    h1 {
+        font-size: 20px;
+        letter-spacing: 2px;
     }
+
     .nav input {
-        text-align: center;
-        padding: 0px 10px 0px 10px;
-    }
-}
-@media (max-width: 1080px) {
-    .nav {
-        height: auto;
-    }
-    .nav input {
-        width: 118px;
-    }
-    .nav button {
         width: 140px;
     }
-    .dropdown-content .dropdown:hover .sub-dropdown {
-        left: 140px;
+
+    .nav button {
+        padding: 0 10px;
+    }
+
+    .sub-dropdown,
+    .third-dropdown {
+        left: auto;
+        right: 100%;
+    }
+}
+
+@media (max-width: 1080px) {
+    .sub-dropdown {
+        left: auto;
+        right: 100%;
     }
     .third-dropdown {
-        left: -100%;
-        border: 1px solid rgb(218, 218, 218);
+        left: auto;
+        right: 100%;
+        border: 0.5px solid #e0e0d8;
     }
     .dropdown-content .dropdown > button::after {
         content: '';

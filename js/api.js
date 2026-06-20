@@ -36,6 +36,11 @@ const subRegiaoParaIngles = {
     'Polinésia': 'Polynesia'
 };
 
+const normalizar = texto => texto
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+
 const regiaoParaPortugues = Object.fromEntries(
     Object.entries(regiaoParaIngles).map(([pt, en]) => [en, pt])
 );
@@ -46,9 +51,9 @@ const subRegiaoParaPortugues = Object.fromEntries(
 
 // carregar a api
 const carregarAPI = () => {
-    fetch('https://restcountries.com/v3.1/all?fields=name,capital,region,subregion,population,area,flags,translations')
+    fetch('./data/countries.json')
     .then(res => res.json())
-    .then(data => { 
+    .then(data => {
         paisesDataOriginal = data; // armazena a lista original
         paisesFiltradosData = [...data]; // inicializa com todos os países
         paisesCarregados = Math.min(quantidadeParaCarregar, paisesFiltradosData.length); // carrega a quantidade inicial
@@ -69,10 +74,10 @@ const mostrarPaises = paises => {
 // pegar os dados e jogar no html
 const getPais = (pais) => {
     return `
-        <div class="caixa-pais" onclick="abrirPaginaDetalhes('${pais.name.common}')">
-        <img src="${pais.flags.png}">
-        <h2>${pais.name.common}</h2>
-        <h3>CAPITAL: ${pais.capital}</h3>
+        <div class="caixa-pais" onclick="abrirPaginaDetalhes('${pais.names.common}')">
+        <img src="${pais.flag.url_png}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/616/616616.png'" alt="${pais.names.common}">
+        <h2>${pais.names.common}</h2>
+        <h3>CAPITAL: ${pais.capitals?.[0]?.name || 'N/A'}</h3>
         <h3>REGIÃO: ${regiaoParaPortugues[pais.region] || pais.region}</h3>
         <p><b>Clique para mais informações</b></p>
         </div>
@@ -90,8 +95,8 @@ const buscarPaises = (termobusca) => {
     document.getElementById('ordenacao-ativa').textContent = 'Ordenar'; // reseta ordenação
     document.getElementById('filtro-ativo').textContent = 'Filtrar'; // reseta filtro
     paisesFiltradosData = paisesDataOriginal.filter(pais =>
-        pais.name.common.toLowerCase().includes(termobusca.toLowerCase()) || 
-        (pais.translations && pais.translations.por && pais.translations.por.common.toLowerCase().includes(termobusca.toLowerCase()))
+        normalizar(pais.names.common).includes(normalizar(termobusca)) || 
+        normalizar(pais.names.translations.por.common).includes(normalizar(termobusca))
     );
     paisesCarregados = Math.min(quantidadeParaCarregar, paisesFiltradosData.length); // atualiza a quantidade de países carregados
     mostrarPaises();
@@ -118,14 +123,14 @@ document.getElementById('limpar').addEventListener('click', () => {
 
 // funções de ordenação
 const ordenarNomeAZ = () => {
-    paisesFiltradosData.sort((a, b) => a.name.common.localeCompare(b.name.common)); // tipo de ordenação (neste caso, alfabetica)
+    paisesFiltradosData.sort((a, b) => a.names.common.localeCompare(b.names.common)); // tipo de ordenação (neste caso, alfabetica)
     paisesCarregados = Math.min(quantidadeParaCarregar, paisesFiltradosData.length); // atualiza a quantidade
     mostrarPaises();
     document.getElementById('ordenacao-ativa').textContent = 'Nome (A-Z)'; // exibe qual ordenação está em vigor
 }
 
 const ordenarNomeZA = () => {
-    paisesFiltradosData.sort((a, b) => b.name.common.localeCompare(a.name.common));
+    paisesFiltradosData.sort((a, b) => b.names.common.localeCompare(a.names.common));
     paisesCarregados = Math.min(quantidadeParaCarregar, paisesFiltradosData.length);
     mostrarPaises();
     document.getElementById('ordenacao-ativa').textContent = 'Nome (Z-A)';
@@ -146,14 +151,14 @@ const ordenarPopulacaoDecrescente = () => {
 }
 
 const ordenarAreaCrescente = () => {
-    paisesFiltradosData.sort((a, b) => a.area - b.area);
+    paisesFiltradosData.sort((a, b) => a.area.kilometers - b.area.kilometers);
     paisesCarregados = Math.min(quantidadeParaCarregar, paisesFiltradosData.length);
     mostrarPaises();
     document.getElementById('ordenacao-ativa').textContent = 'Área crescente';
 }
 
 const ordenarAreaDecrescente = () => {
-    paisesFiltradosData.sort((a, b) => b.area - a.area);
+    paisesFiltradosData.sort((a, b) => b.area.kilometers - a.area.kilometers);
     paisesCarregados = Math.min(quantidadeParaCarregar, paisesFiltradosData.length);
     mostrarPaises();
     document.getElementById('ordenacao-ativa').textContent = 'Área decrescente';

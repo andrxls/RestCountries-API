@@ -9,100 +9,135 @@
 </head>
 <body>
     <div class="header">
-        <h1>PROCURE O PAÍS</h1>
+        <div class="header-logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/616/616616.png" alt="Globo" class="header-icon">
+            <h1>PROCURE O PAÍS</h1>
+        </div>
     </div>
     <div class="nav">
-        <input type="text" name="" id="busca" placeholder="Buscar">
+        <input type="text" id="busca" placeholder="Buscar país...">
         <button id="limpar">Resetar</button>
+
         <div class="dropdown">
             <button><span id="filtro-ativo">Filtrar</span></button>
             <div class="dropdown-content">
-                <div class="dropdown">
-                    <button>Região</button>
-                    <div class="dropdown-content sub-dropdown">
-                        <button data-filter="regiao">África</button>
-                        <button data-filter="regiao">Américas</button>
-                        <button data-filter="regiao">Ásia</button>
-                        <button data-filter="regiao">Europa</button>
-                        <button data-filter="regiao">Oceania</button>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button>Sub-região</button>
-                    <div class="dropdown-content sub-dropdown">
-                        <div class="dropdown">
-                            <button>África</button>
-                            <div class="dropdown-content third-dropdown">
-                                <button data-filter="sub-regiao">África Central</button>
-                                <button data-filter="sub-regiao">África Ocidental</button>
-                                <button data-filter="sub-regiao">África Oriental</button>
-                                <button data-filter="sub-regiao">África Setentrional</button>
-                                <button data-filter="sub-regiao">África Austral</button>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <button>Américas</button>
-                            <div class="dropdown-content third-dropdown">
-                                <button data-filter="sub-regiao">América do Norte</button>
-                                <button data-filter="sub-regiao">América Central</button>
-                                <button data-filter="sub-regiao">América do Sul</button>
-                                <button data-filter="sub-regiao">Caribe</button>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <button>Ásia</button>
-                            <div class="dropdown-content third-dropdown">
-                                <button data-filter="sub-regiao">Ásia Central</button>
-                                <button data-filter="sub-regiao">Ásia Oriental</button>
-                                <button data-filter="sub-regiao">Sudeste Asiático</button>
-                                <button data-filter="sub-regiao">Sul da Ásia</button>
-                                <button data-filter="sub-regiao">Oeste da Ásia</button>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <button>Europa</button>
-                            <div class="dropdown-content third-dropdown">
-                                <button data-filter="sub-regiao">Europa Setentrional</button>
-                                <button data-filter="sub-regiao">Europa Ocidental</button>
-                                <button data-filter="sub-regiao">Europa Meridional</button>
-                                <button data-filter="sub-regiao">Europa Oriental</button>
-                            </div>
-                        </div>
-                        <div class="dropdown">
-                            <button>Oceania</button>
-                            <div class="dropdown-content third-dropdown">
-                                <button data-filter="sub-regiao">Austrália e N. Zelândia</button>
-                                <button data-filter="sub-regiao">Melanésia</button>
-                                <button data-filter="sub-regiao">Micronésia</button>
-                                <button data-filter="sub-regiao">Polinésia</button>
+                <div class="dropdown-content-inner">
+
+                    <div class="dropdown">
+                        <button>Região</button>
+                        <div class="sub-dropdown">
+                            <div class="dropdown-content-inner">
+                                <button data-filter="regiao">África</button>
+                                <button data-filter="regiao">Américas</button>
+                                <button data-filter="regiao">Ásia</button>
+                                <button data-filter="regiao">Europa</button>
+                                <button data-filter="regiao">Oceania</button>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="dropdown">
-                    <button>População</button>
-                    <div class="dropdown-content sub-dropdown">
-                        <button data-filter="populacao" data-range="0-1000000">< 1M</button>
-                        <button data-filter="populacao" data-range="1000000-10000000">1M - 10M</button>
-                        <button data-filter="populacao" data-range="10000000-100000000">10M - 100M</button>
-                        <button data-filter="populacao" data-range="100000000-">> 100M</button>
+
+                    <div class="dropdown">
+                        <button>Sub-região</button>
+                        <div class="sub-dropdown">
+                            <div class="dropdown-content-inner">
+
+                                <div class="dropdown">
+                                    <button>África</button>
+                                    <div class="third-dropdown">
+                                        <div class="dropdown-content-inner">
+                                            <button data-filter="sub-regiao">África Central</button>
+                                            <button data-filter="sub-regiao">África Ocidental</button>
+                                            <button data-filter="sub-regiao">África Oriental</button>
+                                            <button data-filter="sub-regiao">África Setentrional</button>
+                                            <button data-filter="sub-regiao">África Austral</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown">
+                                    <button>Américas</button>
+                                    <div class="third-dropdown">
+                                        <div class="dropdown-content-inner">
+                                            <button data-filter="sub-regiao">América do Norte</button>
+                                            <button data-filter="sub-regiao">América Central</button>
+                                            <button data-filter="sub-regiao">América do Sul</button>
+                                            <button data-filter="sub-regiao">Caribe</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown">
+                                    <button>Ásia</button>
+                                    <div class="third-dropdown">
+                                        <div class="dropdown-content-inner">
+                                            <button data-filter="sub-regiao">Ásia Central</button>
+                                            <button data-filter="sub-regiao">Ásia Oriental</button>
+                                            <button data-filter="sub-regiao">Sudeste Asiático</button>
+                                            <button data-filter="sub-regiao">Sul da Ásia</button>
+                                            <button data-filter="sub-regiao">Oeste da Ásia</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown">
+                                    <button>Europa</button>
+                                    <div class="third-dropdown">
+                                        <div class="dropdown-content-inner">
+                                            <button data-filter="sub-regiao">Europa Setentrional</button>
+                                            <button data-filter="sub-regiao">Europa Ocidental</button>
+                                            <button data-filter="sub-regiao">Europa Meridional</button>
+                                            <button data-filter="sub-regiao">Europa Oriental</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown">
+                                    <button>Oceania</button>
+                                    <div class="third-dropdown">
+                                        <div class="dropdown-content-inner">
+                                            <button data-filter="sub-regiao">Austrália e N. Zelândia</button>
+                                            <button data-filter="sub-regiao">Melanésia</button>
+                                            <button data-filter="sub-regiao">Micronésia</button>
+                                            <button data-filter="sub-regiao">Polinésia</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="dropdown">
+                        <button>População</button>
+                        <div class="sub-dropdown">
+                            <div class="dropdown-content-inner">
+                                <button data-filter="populacao" data-range="0-1000000">&lt; 1M</button>
+                                <button data-filter="populacao" data-range="1000000-10000000">1M – 10M</button>
+                                <button data-filter="populacao" data-range="10000000-100000000">10M – 100M</button>
+                                <button data-filter="populacao" data-range="100000000-">&gt; 100M</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+
         <div class="dropdown">
             <button><span id="ordenacao-ativa">Ordenar</span></button>
             <div class="dropdown-content">
-                <button id="ordenar-nome-az">Nome (A-Z)</button>
-                <button id="ordenar-nome-za">Nome (Z-A)</button>
-                <button id="ordenar-pop-crescente">População crescente</button>
-                <button id="ordenar-pop-decrescente">População decrescente</button>
-                <button id="ordenar-area-crescente">Área crescente</button>
-                <button id="ordenar-area-decrescente">Área decrescente</button>
+                <div class="dropdown-content-inner">
+                    <button id="ordenar-nome-az">Nome (A–Z)</button>
+                    <button id="ordenar-nome-za">Nome (Z–A)</button>
+                    <button id="ordenar-pop-crescente">População crescente</button>
+                    <button id="ordenar-pop-decrescente">População decrescente</button>
+                    <button id="ordenar-area-crescente">Área crescente</button>
+                    <button id="ordenar-area-decrescente">Área decrescente</button>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <div class="paises" id="paises">
         <script src="js/api.js"></script>
     </div>

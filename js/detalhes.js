@@ -3,11 +3,22 @@ const params = new URLSearchParams(window.location.search);
 const paisNome = params.get('pais');
 
 // buscar os detalhes do país
-const carregarDetalhesPais = (paisNome) => {
-    fetch(`https://restcountries.com/v3.1/name/${paisNome}`)
-    .then(res => res.json())
-    .then(data => mostrarDetalhesPais(data[0]));
-}
+let paisesDataOriginal = [];
+
+const carregarDetalhesPais = async (paisNome) => {
+    const res = await fetch('./data/countries.json');
+    const data = await res.json();
+
+    paisesDataOriginal = data;
+
+    const nomeFormatado = decodeURIComponent(paisNome);
+
+    const pais = paisesDataOriginal.find(p =>
+        p.names.common.toLowerCase() === nomeFormatado.toLowerCase()
+    );
+
+    mostrarDetalhesPais(pais);
+};
 
 const regiao = {
     'Africa': 'África',
@@ -43,24 +54,24 @@ const subRegiao = {
 
 // exibir os detalhes do país
 const mostrarDetalhesPais = (pais) => {
-    document.title = `Procure o País - ${pais.name.common}`; // colocar o nome do país no título da página
+    document.title = `Procure o País - ${pais.names.common}`; // colocar o nome do país no título da página
     const detalhesContainer = document.getElementById('pais-detalhes');
     detalhesContainer.innerHTML = `
-        <h4>${pais.name.common}</h4>
+        <h4>${pais.names.common}</h4>
         <p></p>
-        <img src="${pais.flags.png}">
+        <img src="${pais.flag.url_png}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/616/616616.png'" alt="${pais.names.common}">
         <p></p>
-        <h3>Nome em português: ${pais.translations.por.common}</h3>
-        <h3>Capital: ${pais.capital}</h3>
+        <h3>Nome em português: ${pais.names.translations.por.common}</h3>
+        <h3>Capital: ${pais.capitals?.[0]?.name}</h3>
         <h3>Região: ${regiao[pais.region] || pais.region}</h3>
         <h3>Sub-região: ${(subRegiao[pais.subregion] || pais.subregion) || 'Não disponível'}</h3>
         <h3>População: ${pais.population ? pais.population : 'Não disponível'}</h3>
-        <h3>Área: ${pais.area} km²</h3>
-        <h3>Idiomas falados: ${Object.values(pais.languages).join(', ')}</h3>
-        <h3>Moeda:${Object.values(pais.currencies)[0].name}</h3>
-        <h3>Fuso horário: ${pais.timezones.join(', ')}</h3>
-        <h3>Domínio de internet: ${pais.tld.join(', ')}</h3>
-        <h3>Código de discagem: ${pais.idd.root}</h3>
+        <h3>Área: ${pais.area.kilometers} km²</h3>
+        <h3>Idioma oficial: ${pais.languages?.[0].name}</h3>
+        <h3>Moeda:${Object.values(pais.currencies)[0]?.name}</h3>
+        <h3>Fuso horário: ${pais.timezones?.join(', ')}</h3>
+        <h3>Domínio de internet: ${pais.tlds?.[0]}</h3>
+        <h3>Código de discagem: ${pais.calling_codes?.[0]}</h3>
         <p><b>Clique aqui para voltar</b></p>
     `;
 }
