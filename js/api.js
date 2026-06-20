@@ -7,6 +7,7 @@ const quantidadeParaCarregar = 20; // quantidade de países a carregar a cada sc
 const regiaoParaIngles = {
     'África': 'Africa',
     'Américas': 'Americas',
+    'Antártica': 'Antarctic',
     'Ásia': 'Asia',
     'Europa': 'Europe'
 };
