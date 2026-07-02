@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Header } from './shared/header/header';
-import { CountriesList } from './pages/countries-list/countries-list';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, CountriesList],
+  imports: [Header, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
