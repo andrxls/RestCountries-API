@@ -14,6 +14,16 @@ export class CountriesList implements OnInit {
   private readonly changeDetector = inject(ChangeDetectorRef);
   private readonly router = inject(Router);
 
+  activeMobilePanel: 'filter' | 'sort' | null = null;
+
+  openMobilePanel(panel: 'filter' | 'sort'): void {
+  this.activeMobilePanel = panel;
+}
+
+closeMobilePanel(): void {
+  this.activeMobilePanel = null;
+}
+
   translateRegion(region: string | null | undefined): string {
     return translateRegion(region);
   }
@@ -84,6 +94,7 @@ filterByRegion(region: string, label: string): void {
   this.populationMax = null;
   this.activeFilterLabel = label;
   this.applyFilters();
+  this.closeMobilePanel();
 }
 
 filterBySubregion(subregion: string, label: string): void {
@@ -93,6 +104,7 @@ filterBySubregion(subregion: string, label: string): void {
   this.populationMax = null;
   this.activeFilterLabel = label;
   this.applyFilters();
+  this.closeMobilePanel();
 }
 
 filterByPopulation(min: number, max: number | null, label: string): void {
@@ -102,12 +114,14 @@ filterByPopulation(min: number, max: number | null, label: string): void {
   this.activeSubregion = '';
   this.activeFilterLabel = label;
   this.applyFilters();
+  this.closeMobilePanel();
 }
 
 sortBy(sort: string, label: string): void {
   this.activeSort = sort;
   this.activeSortLabel = label;
   this.applyFilters();
+  this.closeMobilePanel();
 }
 
 clearFilters(): void {
@@ -122,7 +136,7 @@ clearFilters(): void {
   this.filteredCountries = this.countries;
   this.visibleCount = this.itemsPerPage;
   this.applySorting();
-  
+  this.closeMobilePanel();
 }
 
 applyFilters(): void {

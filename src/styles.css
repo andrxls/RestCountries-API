@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 /* === RESET & BASE === */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -11,43 +10,6 @@ body {
     font-size: 14px;
     background-color: #f5f5f0;
     color: #1a1a1a;
-}
-
-/* === HEADER === */
-.header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: #ffffff;
-    border-bottom: 0.5px solid #e0e0d8;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 24px;
-}
-
-.header-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.header-icon {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-    display: block;
-    flex-shrink: 0;
-}
-
-h1 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: #1a1a1a;
-    text-align: center;
 }
 
 /* === NAV === */
@@ -443,83 +405,6 @@ h2.vazio {
     padding: 48px 0;
 }
 
-/* === RESPONSIVO === */
-@media (max-width: 1200px) {
-    .paises {
-        grid-template-columns: repeat(3, 1fr);
-        max-width: 900px;
-    }
-}
-
-@media (max-width: 900px) {
-    .paises {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 600px;
-    }
-}
-
-@media (max-width: 600px) {
-    .paises {
-        grid-template-columns: 1fr;
-        max-width: 340px;
-        padding: 0 16px;
-    }
-
-    .caixa-pais2 {
-        margin: 16px;
-        max-width: 100%;
-    }
-
-    h1 {
-        font-size: 20px;
-        letter-spacing: 2px;
-    }
-
-    .nav input {
-        width: 140px;
-    }
-
-    .nav button {
-        padding: 0 10px;
-    }
-
-    .sub-dropdown,
-    .third-dropdown {
-        left: auto;
-        right: 100%;
-    }
-}
-
-@media (max-width: 1080px) {
-    .sub-dropdown {
-        left: auto;
-        right: 100%;
-    }
-    .third-dropdown {
-        left: auto;
-        right: 100%;
-        border: 0.5px solid #e0e0d8;
-    }
-    .dropdown-content .dropdown > button::after {
-        content: '';
-    }
-}
-
-@media (max-width: 700px) {
-    .caixa-pais2 {
-        flex-direction: column;
-        margin: 16px;
-        max-width: 100%;
-    }
-
-    #mapa-pais {
-        width: 100%;
-        border-left: none;
-        border-top: 0.5px solid #f0ede8;
-        min-height: 260px;
-    }
-}
-
 .carregar-mais {
     display: flex;
     justify-content: center;
@@ -543,4 +428,250 @@ h2.vazio {
     background: #1a1a1a;
     color: #fff;
     border-color: #1a1a1a;
+}
+
+/* === RESPONSIVO REFEITO === */
+
+.nav-search-area {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.desktop-dropdowns {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.mobile-actions {
+    display: none;
+}
+
+.mobile-panel,
+.mobile-panel-backdrop {
+    display: none;
+}
+
+/* Tablets */
+@media (max-width: 1200px) {
+    .paises {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 900px) {
+    .paises {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 680px;
+        gap: 28px;
+    }
+
+    .caixa-pais2 {
+        margin: 24px 16px;
+    }
+}
+
+/* Celular */
+@media (max-width: 700px) {
+    .header {
+        height: auto;
+        min-height: 72px;
+        padding: 14px 16px;
+        position: sticky;
+        top: 0;
+    }
+
+    .header-logo {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .header-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    h1 {
+        font-size: 19px;
+        letter-spacing: 2px;
+    }
+
+    .nav {
+        top: 72px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 14px;
+        justify-items: stretch;
+    }
+
+    .nav-search-area {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .nav input {
+        width: 100%;
+        min-width: 0;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    #limpar {
+        height: 38px;
+        padding: 0 12px;
+    }
+
+    .desktop-dropdowns {
+        display: none;
+    }
+
+    .mobile-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .mobile-actions button {
+        width: 100%;
+        height: 34px;
+    }
+
+    .paises {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        gap: 22px;
+        margin: 20px auto;
+        padding: 0 16px;
+    }
+
+    .caixa-pais img {
+        height: 160px;
+    }
+
+    .caixa-pais2 {
+        flex-direction: column;
+        margin: 16px;
+        max-width: none;
+    }
+
+    #mapa-pais {
+        width: 100%;
+        min-height: 280px;
+        border-left: none;
+        border-top: 0.5px solid #f0ede8;
+    }
+
+    .mobile-panel-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 500;
+    }
+
+    .mobile-panel {
+        display: block;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        max-height: 78vh;
+        overflow-y: auto;
+        background: #ffffff;
+        border-radius: 18px 18px 0 0;
+        z-index: 501;
+        box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.18);
+        padding: 16px;
+    }
+
+    .mobile-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 14px;
+        border-bottom: 0.5px solid #e0e0d8;
+        padding-bottom: 12px;
+    }
+
+    .mobile-panel-header h2 {
+        font-size: 17px;
+        color: #1a1a1a;
+    }
+
+    .mobile-panel-header button {
+        height: 32px;
+        padding: 0 12px;
+        border: 0.5px solid #ccc;
+        border-radius: 8px;
+        background: #fff;
+        color: #444;
+    }
+
+    .mobile-panel-content {
+        display: grid;
+        gap: 8px;
+    }
+
+    .mobile-panel-content h3 {
+        margin-top: 14px;
+        margin-bottom: 4px;
+        font-size: 13px;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .mobile-panel-content h3:first-child {
+        margin-top: 0;
+    }
+
+    .mobile-panel-content button {
+        width: 100%;
+        min-height: 38px;
+        padding: 9px 12px;
+        text-align: left;
+        border: 0.5px solid #e0e0d8;
+        border-radius: 9px;
+        background: #fff;
+        color: #333;
+        font-size: 14px;
+    }
+
+    .mobile-panel-content button:active {
+        background: #1a1a1a;
+        color: #fff;
+    }
+}
+
+/* Telefones muito estreitos */
+@media (max-width: 380px) {
+    h1 {
+        font-size: 17px;
+        letter-spacing: 1.5px;
+    }
+
+    .header-icon {
+        width: 26px;
+        height: 26px;
+    }
+
+    .nav {
+        padding: 10px;
+    }
+
+    #limpar {
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .mobile-actions button {
+        font-size: 12px;
+    }
 }
