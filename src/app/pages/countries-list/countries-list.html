@@ -1,17 +1,31 @@
-@if (loading) {
-  <p>Carregando países...</p>
-}
+<main class="countries-page">
+  @if (loading) {
+    <p class="status-message">Carregando países...</p>
+  }
 
-@if (error) {
-  <p>{{ error }}</p>
-}
+  @if (error) {
+    <p class="status-message error-message">{{ error }}</p>
+  }
 
-@if (!loading && !error) {
-  <p>Total de países carregados: {{ countries.length }}</p>
+  @if (!loading && !error) {
+    <section class="countries-grid">
+      @for (country of countries.slice(0, 20); track $index) {
+        <article class="country-card">
+          <h2>{{ country.names.common }}</h2>
 
-  <ul>
-    @for (country of countries.slice(0, 10); track $index) {
-      <li>{{ country.names.common }}</li>
-    }
-  </ul>
-}
+          <h3>
+            CAPITAL:
+            {{ country.capitals?.[0]?.name || 'N/A' }}
+          </h3>
+
+          <h3>
+            REGIÃO:
+            {{ country.region || 'N/A' }}
+          </h3>
+
+          <p>Clique para mais informações</p>
+        </article>
+      }
+    </section>
+  }
+</main>
