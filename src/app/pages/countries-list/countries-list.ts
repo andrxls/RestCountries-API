@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, inject } from '@angular/core';
 import { CountriesService } from '../../core/services/countries';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-countries-list',
@@ -10,6 +11,17 @@ import { CountriesService } from '../../core/services/countries';
 export class CountriesList implements OnInit {
   private readonly countriesService = inject(CountriesService);
   private readonly changeDetector = inject(ChangeDetectorRef);
+  private readonly router = inject(Router);
+
+  openCountryDetails(country: any): void {
+  const countryName = country.names?.common;
+
+  if (!countryName) {
+    return;
+  }
+
+  this.router.navigate(['/pais', countryName]);
+}
 
   countries: any[] = [];
   filteredCountries: any[] = [];

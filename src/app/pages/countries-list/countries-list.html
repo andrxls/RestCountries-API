@@ -151,7 +151,7 @@
   @if (!loading && !error) {
     <section class="paises">
   @for (country of visibleCountries; track $index) {
-    <article class="caixa-pais">
+    <article class="caixa-pais" (click)="openCountryDetails(country)">
         <img
           [src]="country.flag?.url_png || country.flag?.url_svg || 'https://cdn-icons-png.flaticon.com/512/616/616616.png'" 
           [alt]="country.flag?.description || country.names.common"
