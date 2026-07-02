@@ -26,18 +26,23 @@
       </h3>
 
       <h3>
+        <span>Nome em português</span>
+        <span>{{ country.names?.translations.por.common || 'N/A' }}</span>
+      </h3>
+
+      <h3>
         <span>Capital</span>
         <span>{{ country.capitals?.[0]?.name || 'N/A' }}</span>
       </h3>
 
       <h3>
         <span>Região</span>
-        <span>{{ country.region || 'N/A' }}</span>
+        <span>{{ translateRegion(country.region) || 'N/A' }}</span>
       </h3>
 
       <h3>
         <span>Sub-região</span>
-        <span>{{ country.subregion || 'N/A' }}</span>
+        <span>{{ translateSubregion(country.subregion) || 'N/A' }}</span>
       </h3>
 
       <h3>
@@ -47,7 +52,32 @@
 
       <h3>
         <span>Área</span>
-        <span>{{ country.area || 'N/A' }}</span>
+        <span>{{ country.area.kilometers || 'N/A' }} km²</span>
+      </h3>
+
+      <h3>
+        <span>Idioma oficial</span>
+        <span>{{ country.languages?.[0]?.name || 'N/A' }}</span>
+      </h3>
+
+      <h3>
+        <span>Moeda</span>
+        <span>{{ country.currencies[0]?.name || 'N/A' }}</span>
+      </h3>
+
+      <h3>
+        <span>Fuso horário</span>
+        <span>{{ country.timezones?.join(', ') || 'N/A' }}</span>
+      </h3>
+
+      <h3>
+        <span>Domínio de internet</span>
+        <span>{{ country.tlds?.[0] || 'N/A' }}</span>
+      </h3>
+
+      <h3>
+        <span>Código de discagem</span>
+        <span>{{ country.calling_codes?.[0] || 'N/A' }}</span>
       </h3>
     </div>
   </div>

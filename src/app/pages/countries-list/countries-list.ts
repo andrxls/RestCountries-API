@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit, inject } from '@angular/core';
 import { CountriesService } from '../../core/services/countries';
 import { Router } from '@angular/router';
+import { translateRegion } from '../../core/utils/country-translations';
 
 @Component({
   selector: 'app-countries-list',
@@ -12,6 +13,10 @@ export class CountriesList implements OnInit {
   private readonly countriesService = inject(CountriesService);
   private readonly changeDetector = inject(ChangeDetectorRef);
   private readonly router = inject(Router);
+
+  translateRegion(region: string | null | undefined): string {
+    return translateRegion(region);
+  }
 
   openCountryDetails(country: any): void {
   const countryName = country.names?.common;

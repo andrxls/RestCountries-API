@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CountriesService } from '../../core/services/countries';
+import { translateRegion, translateSubregion } from '../../core/utils/country-translations';
 
 @Component({
   selector: 'app-country-details',
@@ -17,6 +18,14 @@ export class CountryDetails implements OnInit {
   country: any;
   loading = true;
   error = '';
+
+  translateRegion(region: string | null | undefined): string {
+    return translateRegion(region);
+  }
+
+  translateSubregion(subregion: string | null | undefined): string {
+    return translateSubregion(subregion);
+  }
 
   ngOnInit(): void {
     const countryNameFromRoute = this.route.snapshot.paramMap.get('name');
