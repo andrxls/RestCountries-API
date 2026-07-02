@@ -11,6 +11,7 @@ export class CountriesList implements OnInit {
   private readonly countriesService = inject(CountriesService);
 
   countries: any[] = [];
+  filteredCountries: any[] = [];
   loading = true;
   error = '';
 
@@ -18,6 +19,7 @@ export class CountriesList implements OnInit {
     this.countriesService.getCountries().subscribe({
       next: (countries) => {
         this.countries = countries;
+        this.filteredCountries = countries;
         this.loading = false;
       },
       error: (error) => {
@@ -39,7 +41,7 @@ populationMax: number | null = null;
 
 onSearch(value: string): void {
   this.searchTerm = value;
-  console.log('Busca:', this.searchTerm);
+  this.applyFilters();
 }
 
 filterByRegion(region: string, label: string): void {
@@ -48,7 +50,7 @@ filterByRegion(region: string, label: string): void {
   this.populationMin = null;
   this.populationMax = null;
   this.activeFilterLabel = label;
-  console.log('Região:', region);
+  this.applyFilters();
 }
 
 filterBySubregion(subregion: string, label: string): void {
@@ -57,7 +59,7 @@ filterBySubregion(subregion: string, label: string): void {
   this.populationMin = null;
   this.populationMax = null;
   this.activeFilterLabel = label;
-  console.log('Sub-região:', subregion);
+  this.applyFilters();
 }
 
 filterByPopulation(min: number, max: number | null, label: string): void {
@@ -66,13 +68,13 @@ filterByPopulation(min: number, max: number | null, label: string): void {
   this.activeRegion = '';
   this.activeSubregion = '';
   this.activeFilterLabel = label;
-  console.log('População:', min, max);
+  this.applyFilters();
 }
 
 sortBy(sort: string, label: string): void {
   this.activeSort = sort;
   this.activeSortLabel = label;
-  console.log('Ordenação:', sort);
+  this.applyFilters();
 }
 
 clearFilters(): void {
@@ -84,6 +86,85 @@ clearFilters(): void {
   this.activeSortLabel = '';
   this.populationMin = null;
   this.populationMax = null;
-  console.log('Filtros limpos');
+  this.filteredCountries = this.countries;
+}
+
+applyFilters(): void {
+  const normalizedSearch = this.normalizeText(this.searchTerm);
+
+  this.filteredCountries = this.countries.filter((country) => {
+    const countryName = this.normalizeText([
+      country.names?.common,
+      country.names?.official,
+      country.names?.translations?.por?.common,
+      country.names?.translations?.por?.official,
+      ...(country.names?.alternates || [])
+    ].filter(Boolean).join(' '));
+
+    const countryRegion = country.region || '';
+    const countrySubregion = country.subregion || '';
+    const countryPopulation = country.population || 0;
+
+    const matchesSearch = !normalizedSearch || countryName.includes(normalizedSearch);
+    const matchesRegion = !this.activeRegion || countryRegion === this.activeRegion;
+    const matchesSubregion = !this.activeSubregion || countrySubregion === this.activeSubregion;
+
+    const matchesPopulation =
+      this.populationMin === null ||
+      (
+        countryPopulation >= this.populationMin &&
+        (this.populationMax === null || countryPopulation < this.populationMax)
+      );
+
+    return matchesSearch && matchesRegion && matchesSubregion && matchesPopulation;
+  });
+
+  this.applySorting();
+}
+
+applySorting(): void {
+  const sortedCountries = [...this.filteredCountries];
+
+  sortedCountries.sort((a, b) => {
+    const nameA = a.names?.common || '';
+    const nameB = b.names?.common || '';
+    const populationA = a.population || 0;
+    const populationB = b.population || 0;
+    const areaA = a.area || 0;
+    const areaB = b.area || 0;
+
+    switch (this.activeSort) {
+      case 'name-asc':
+        return nameA.localeCompare(nameB);
+
+      case 'name-desc':
+        return nameB.localeCompare(nameA);
+
+      case 'population-asc':
+        return populationA - populationB;
+
+      case 'population-desc':
+        return populationB - populationA;
+
+      case 'area-asc':
+        return areaA - areaB;
+
+      case 'area-desc':
+        return areaB - areaA;
+
+      default:
+        return 0;
+    }
+  });
+
+  this.filteredCountries = sortedCountries;
+}
+
+normalizeText(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
 }
 }
