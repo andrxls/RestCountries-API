@@ -12,7 +12,7 @@
 
 @if (!loading && !error && country) {
   <div class="caixa-pais2">
-    <div id="pais-detalhes">
+    <div id="pais-detalhes" (click)="goBack()">
       <img
         [src]="country.flag?.url_png || country.flag?.url_svg || 'https://cdn-icons-png.flaticon.com/512/616/616616.png'"
         [alt]="country.flag?.description || 'Bandeira não disponível'"
@@ -80,5 +80,6 @@
         <span>{{ country.calling_codes?.[0] || 'N/A' }}</span>
       </h3>
     </div>
+    <div id="mapa-pais"></div>
   </div>
 }
