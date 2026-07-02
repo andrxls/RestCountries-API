@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit, inject } from '@angular/core';
 import { CountriesService } from '../../core/services/countries';
 
 @Component({
@@ -9,18 +9,22 @@ import { CountriesService } from '../../core/services/countries';
 })
 export class CountriesList implements OnInit {
   private readonly countriesService = inject(CountriesService);
+  private readonly changeDetector = inject(ChangeDetectorRef);
 
   countries: any[] = [];
   filteredCountries: any[] = [];
   loading = true;
   error = '';
+  itemsPerPage = 20;
+  visibleCount = 20;
 
   ngOnInit(): void {
     this.countriesService.getCountries().subscribe({
       next: (countries) => {
         this.countries = countries;
-        this.filteredCountries = countries;
+        this.applyFilters();
         this.loading = false;
+        this.changeDetector.detectChanges();
       },
       error: (error) => {
         console.error('Erro ao carregar países:', error);
@@ -29,6 +33,18 @@ export class CountriesList implements OnInit {
       }
     });
   }
+
+get visibleCountries(): any[] {
+  return this.filteredCountries.slice(0, this.visibleCount);
+}
+
+get hasMoreCountries(): boolean {
+  return this.visibleCount < this.filteredCountries.length;
+}
+
+loadMore(): void {
+  this.visibleCount += this.itemsPerPage;
+}
 
 searchTerm = '';
 activeRegion = '';
@@ -87,6 +103,9 @@ clearFilters(): void {
   this.populationMin = null;
   this.populationMax = null;
   this.filteredCountries = this.countries;
+  this.visibleCount = this.itemsPerPage;
+  this.applySorting();
+  
 }
 
 applyFilters(): void {
@@ -119,6 +138,7 @@ applyFilters(): void {
     return matchesSearch && matchesRegion && matchesSubregion && matchesPopulation;
   });
 
+  this.visibleCount = this.itemsPerPage;
   this.applySorting();
 }
 
@@ -166,5 +186,16 @@ normalizeText(value: string): string {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .trim();
+}
+
+@HostListener('window:scroll')
+onWindowScroll(): void {
+  const scrollPosition = window.innerHeight + window.scrollY;
+  const documentHeight = document.documentElement.scrollHeight;
+  const distanceFromBottom = documentHeight - scrollPosition;
+
+  if (distanceFromBottom < 250 && this.hasMoreCountries) {
+    this.loadMore();
+  }
 }
 }
