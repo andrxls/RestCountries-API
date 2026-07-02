@@ -27,4 +27,63 @@ export class CountriesList implements OnInit {
       }
     });
   }
+
+searchTerm = '';
+activeRegion = '';
+activeSubregion = '';
+activeSort = '';
+activeFilterLabel = '';
+activeSortLabel = '';
+populationMin: number | null = null;
+populationMax: number | null = null;
+
+onSearch(value: string): void {
+  this.searchTerm = value;
+  console.log('Busca:', this.searchTerm);
+}
+
+filterByRegion(region: string, label: string): void {
+  this.activeRegion = region;
+  this.activeSubregion = '';
+  this.populationMin = null;
+  this.populationMax = null;
+  this.activeFilterLabel = label;
+  console.log('Região:', region);
+}
+
+filterBySubregion(subregion: string, label: string): void {
+  this.activeSubregion = subregion;
+  this.activeRegion = '';
+  this.populationMin = null;
+  this.populationMax = null;
+  this.activeFilterLabel = label;
+  console.log('Sub-região:', subregion);
+}
+
+filterByPopulation(min: number, max: number | null, label: string): void {
+  this.populationMin = min;
+  this.populationMax = max;
+  this.activeRegion = '';
+  this.activeSubregion = '';
+  this.activeFilterLabel = label;
+  console.log('População:', min, max);
+}
+
+sortBy(sort: string, label: string): void {
+  this.activeSort = sort;
+  this.activeSortLabel = label;
+  console.log('Ordenação:', sort);
+}
+
+clearFilters(): void {
+  this.searchTerm = '';
+  this.activeRegion = '';
+  this.activeSubregion = '';
+  this.activeSort = '';
+  this.activeFilterLabel = '';
+  this.activeSortLabel = '';
+  this.populationMin = null;
+  this.populationMax = null;
+  console.log('Filtros limpos');
+}
 }
