@@ -1,0 +1,17 @@
+@if (loading) {
+  <p>Carregando países...</p>
+}
+
+@if (error) {
+  <p>{{ error }}</p>
+}
+
+@if (!loading && !error) {
+  <p>Total de países carregados: {{ countries.length }}</p>
+
+  <ul>
+    @for (country of countries.slice(0, 10); track $index) {
+      <li>{{ country.names.common }}</li>
+    }
+  </ul>
+}
