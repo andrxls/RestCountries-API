@@ -1,1 +1,54 @@
-<p>country-details works!</p>
+<div class="nav">
+  <button type="button" (click)="goBack()">Voltar</button>
+</div>
+
+@if (loading) {
+  <p>Carregando país...</p>
+}
+
+@if (error) {
+  <h2 class="vazio">{{ error }}</h2>
+}
+
+@if (!loading && !error && country) {
+  <div class="caixa-pais2">
+    <div id="pais-detalhes">
+      <img
+        [src]="country.flag?.url_png || country.flag?.url_svg || 'https://cdn-icons-png.flaticon.com/512/616/616616.png'"
+        [alt]="country.flag?.description || 'Bandeira não disponível'"
+      >
+
+      <h4>{{ country.names?.common }}</h4>
+
+      <h3>
+        <span>Nome oficial</span>
+        <span>{{ country.names?.official || 'N/A' }}</span>
+      </h3>
+
+      <h3>
+        <span>Capital</span>
+        <span>{{ country.capitals?.[0]?.name || 'N/A' }}</span>
+      </h3>
+
+      <h3>
+        <span>Região</span>
+        <span>{{ country.region || 'N/A' }}</span>
+      </h3>
+
+      <h3>
+        <span>Sub-região</span>
+        <span>{{ country.subregion || 'N/A' }}</span>
+      </h3>
+
+      <h3>
+        <span>População</span>
+        <span>{{ country.population || 'N/A' }}</span>
+      </h3>
+
+      <h3>
+        <span>Área</span>
+        <span>{{ country.area || 'N/A' }}</span>
+      </h3>
+    </div>
+  </div>
+}
