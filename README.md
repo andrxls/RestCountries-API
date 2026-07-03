@@ -91,6 +91,11 @@ http://localhost:4200
 - 🏷️ **Filtro e ordenação ativos**
   - Os botões principais exibem o filtro ou ordenação em uso
 
+- 🌓 **Modo claro e escuro**
+  - Permite alternar visualmente entre light mode e dark mode
+  - A interface adapta cores de fundo, textos, botões, cards, menus, painel mobile e campo de busca
+  - O botão de tema usa ícone de sol/lua para indicar a troca visual
+
 - 📄 **Página de detalhes**
   - Ao clicar em um país, o usuário acessa uma página com informações adicionais
 
@@ -105,13 +110,33 @@ http://localhost:4200
 
 ---
 
+## Tema claro e escuro
+
+A aplicação conta com alternância entre **modo claro** e **modo escuro**, permitindo uma experiência visual mais confortável em diferentes ambientes.
+
+O tema foi implementado com variáveis CSS, facilitando a troca de cores entre os modos sem duplicar toda a estrutura visual da interface.
+
+O dark mode ajusta os principais elementos da aplicação:
+
+- Fundo geral da página
+- Barra de navegação
+- Campo de busca
+- Botões
+- Menus dropdown
+- Submenus
+- Cards dos países
+- Página de detalhes
+- Painéis de filtro e ordenação no mobile/tablet
+
+---
+
 ## Responsividade
 
 A versão mobile recebeu uma adaptação própria para melhorar a experiência em telas menores.
 
 No desktop, a navegação mantém os menus dropdown, seguindo a proposta visual original.
 
-No celular, a interface foi reorganizada:
+Em tablets e celulares, a interface foi reorganizada:
 
 - O título fica centralizado no topo
 - A barra de busca ocupa mais espaço horizontal
@@ -119,7 +144,7 @@ No celular, a interface foi reorganizada:
 - Os botões de filtro e ordenação aparecem lado a lado
 - Filtros e ordenações são exibidos em painéis próprios, evitando problemas com menus baseados em hover
 
-Essa mudança tornou a experiência em dispositivos móveis mais clara e confortável para toque.
+Essa mudança tornou a experiência em dispositivos móveis mais clara e confortável para toque, além de evitar que submenus fiquem cortados em larguras intermediárias.
 
 ---
 
@@ -220,6 +245,7 @@ Este projeto passou por três fases principais:
 - Integração com Leaflet
 - Melhor organização do código
 - Layout responsivo para desktop, tablet e celular
+- Implementação de modo claro e escuro
 
 ---
 
@@ -233,6 +259,7 @@ Funcionalidades principais implementadas:
 - Busca em tempo real
 - Filtros por região, sub-região e população
 - Ordenação por nome, população e área
+- Alternância entre modo claro e escuro
 - Carregamento progressivo dos cards
 - Página de detalhes
 - Mapa com Leaflet
