@@ -28,8 +28,8 @@ A aplicação utiliza um arquivo JSON local com dados baseados na RestCountries,
 ## Preview
 
 <div align="center">
-  <img src="./public/assets/preview/desktop.png" alt="Preview desktop do projeto" width="68%">
-  <img src="./public/assets/preview/mobile.png" alt="Preview mobile do projeto" width="24%">
+  <img src="./public/assets/preview/desktop.png" alt="Preview desktop do Procure o País" height="420">
+  <img src="./public/assets/preview/mobile.png" alt="Preview mobile do Procure o País" height="420">
 </div>
 
 ---
