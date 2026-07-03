@@ -27,13 +27,9 @@ A aplicação utiliza um arquivo JSON local com dados baseados na RestCountries,
 
 ## Preview
 
-### Desktop
-
-![Preview desktop](./public/assets/preview/desktop.png)
-
-### Mobile
-
-![Preview mobile](./public/assets/preview/mobile.png)
+| Desktop | Mobile |
+| ------- | ------ |
+| <img src="./public/assets/preview/desktop.png" alt="Preview desktop do projeto" width="100%"> | <img src="./public/assets/preview/mobile.png" alt="Preview mobile do projeto" width="220"> |
 
 ---
 
