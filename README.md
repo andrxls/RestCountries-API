@@ -68,30 +68,6 @@ http://localhost:4200
 
 ---
 
-## Build de produção
-
-Para gerar a versão final do projeto:
-
-```bash
-npm run build
-```
-
-Os arquivos de produção serão gerados na pasta:
-
-```text
-dist/
-```
-
-Para testar o build localmente:
-
-```bash
-npx serve -s dist/NOME-DO-PROJETO/browser
-```
-
-Substitua `NOME-DO-PROJETO` pelo nome da pasta gerada dentro de `dist`.
-
----
-
 ## Funcionalidades
 
 - 🔍 **Busca em tempo real**
