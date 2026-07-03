@@ -14,6 +14,13 @@ export class CountriesList implements OnInit {
   private readonly changeDetector = inject(ChangeDetectorRef);
   private readonly router = inject(Router);
 
+  isDarkMode = false;
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    document.body.classList.toggle('dark-mode', this.isDarkMode);
+  }
+
   activeMobilePanel: 'filter' | 'sort' | null = null;
 
   openMobilePanel(panel: 'filter' | 'sort'): void {

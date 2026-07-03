@@ -2,8 +2,8 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: #ffffff;
-    border-bottom: 0.5px solid #e0e0d8;
+    background: var(--bg-surface);
+    border-bottom: 0.5px solid var(--border);
     height: 64px;
     display: flex;
     align-items: center;
@@ -30,7 +30,7 @@ h1 {
     font-size: 26px;
     font-weight: 700;
     letter-spacing: 3px;
-    color: #1a1a1a;
+    color: var(--text-main);
     text-align: center;
 }
 
