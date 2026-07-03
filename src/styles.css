@@ -459,47 +459,8 @@ h2.vazio {
         grid-template-columns: repeat(3, 1fr);
         max-width: 960px;
     }
-}
-
-@media (max-width: 900px) {
-    .paises {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 680px;
-        gap: 28px;
-    }
-
-    .caixa-pais2 {
-        margin: 24px 16px;
-    }
-}
-
-/* Celular */
-@media (max-width: 700px) {
-    .header {
-        height: auto;
-        min-height: 72px;
-        padding: 14px 16px;
-        position: sticky;
-        top: 0;
-    }
-
-    .header-logo {
-        justify-content: center;
-        width: 100%;
-    }
-
-    .header-icon {
-        width: 30px;
-        height: 30px;
-    }
-
-    h1 {
-        font-size: 19px;
-        letter-spacing: 2px;
-    }
 
     .nav {
-        top: 72px;
         display: grid;
         grid-template-columns: 1fr;
         gap: 10px;
@@ -511,7 +472,8 @@ h2.vazio {
         display: grid;
         grid-template-columns: 1fr auto;
         gap: 8px;
-        width: 100%;
+        width: 80%;
+        margin: 0 auto;
     }
 
     .nav input {
@@ -534,37 +496,13 @@ h2.vazio {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
-        width: 100%;
+        width: 80%;
+        margin: 0 auto;
     }
 
     .mobile-actions button {
         width: 100%;
         height: 34px;
-    }
-
-    .paises {
-        grid-template-columns: 1fr;
-        max-width: 380px;
-        gap: 22px;
-        margin: 20px auto;
-        padding: 0 16px;
-    }
-
-    .caixa-pais img {
-        height: 160px;
-    }
-
-    .caixa-pais2 {
-        flex-direction: column;
-        margin: 16px;
-        max-width: none;
-    }
-
-    #mapa-pais {
-        width: 100%;
-        min-height: 280px;
-        border-left: none;
-        border-top: 0.5px solid #f0ede8;
     }
 
     .mobile-panel-backdrop {
@@ -616,7 +554,18 @@ h2.vazio {
 
     .mobile-panel-content {
         display: grid;
+        gap: 20px;
+    }
+
+    .mobile-panel-content > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 8px;
+    }
+
+    .mobile-panel-content h3 {
+        grid-column: 1 / -1;
+        margin: 0;
     }
 
     .mobile-panel-content h3 {
@@ -647,6 +596,60 @@ h2.vazio {
     .mobile-panel-content button:active {
         background: #1a1a1a;
         color: #fff;
+    }
+
+
+}
+
+@media (max-width: 900px) {
+    .paises {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 680px;
+        gap: 28px;
+    }
+
+    .caixa-pais2 {
+        margin: 24px 16px;
+    }
+}
+
+/* Celular */
+@media (max-width: 700px) {
+    .nav-search-area {
+        width: 100%;
+    }
+
+    .mobile-actions {
+        width: 100%;
+    }
+
+    .mobile-panel-content > div {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .paises {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        gap: 22px;
+        margin: 20px auto;
+        padding: 0 16px;
+    }
+
+    .caixa-pais img {
+        height: 160px;
+    }
+
+    .caixa-pais2 {
+        flex-direction: column;
+        margin: 16px;
+        max-width: none;
+    }
+
+    #mapa-pais {
+        width: 100%;
+        min-height: 280px;
+        border-left: none;
+        border-top: 0.5px solid #f0ede8;
     }
 }
 

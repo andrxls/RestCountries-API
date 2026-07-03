@@ -174,50 +174,54 @@
 
     @if (activeMobilePanel === 'filter') {
       <div class="mobile-panel-content">
-        <h3>Região</h3>
+        <div class="mobile-panel-region">
+          <h3>Região</h3>
 
-        <button type="button" (click)="filterByRegion('Africa', 'África')">África</button>
-        <button type="button" (click)="filterByRegion('Americas', 'Américas')">Américas</button>
-        <button type="button" (click)="filterByRegion('Antarctic', 'Antártica')">Antártica</button>
-        <button type="button" (click)="filterByRegion('Asia', 'Ásia')">Ásia</button>
-        <button type="button" (click)="filterByRegion('Europe', 'Europa')">Europa</button>
-        <button type="button" (click)="filterByRegion('Oceania', 'Oceania')">Oceania</button>
+          <button type="button" (click)="filterByRegion('Africa', 'África')">África</button>
+          <button type="button" (click)="filterByRegion('Americas', 'Américas')">Américas</button>
+          <button type="button" (click)="filterByRegion('Antarctic', 'Antártica')">Antártica</button>
+          <button type="button" (click)="filterByRegion('Asia', 'Ásia')">Ásia</button>
+          <button type="button" (click)="filterByRegion('Europe', 'Europa')">Europa</button>
+          <button type="button" (click)="filterByRegion('Oceania', 'Oceania')">Oceania</button>
+        </div>
+        <div class="mobile-panel-subregion">
+          <h3>Sub-região</h3>
 
-        <h3>Sub-região</h3>
+          <button type="button" (click)="filterBySubregion('Middle Africa', 'África Central')">África Central</button>
+          <button type="button" (click)="filterBySubregion('Western Africa', 'África Ocidental')">África Ocidental</button>
+          <button type="button" (click)="filterBySubregion('Eastern Africa', 'África Oriental')">África Oriental</button>
+          <button type="button" (click)="filterBySubregion('Northern Africa', 'África Setentrional')">África Setentrional</button>
+          <button type="button" (click)="filterBySubregion('Southern Africa', 'África Austral')">África Austral</button>
 
-        <button type="button" (click)="filterBySubregion('Middle Africa', 'África Central')">África Central</button>
-        <button type="button" (click)="filterBySubregion('Western Africa', 'África Ocidental')">África Ocidental</button>
-        <button type="button" (click)="filterBySubregion('Eastern Africa', 'África Oriental')">África Oriental</button>
-        <button type="button" (click)="filterBySubregion('Northern Africa', 'África Setentrional')">África Setentrional</button>
-        <button type="button" (click)="filterBySubregion('Southern Africa', 'África Austral')">África Austral</button>
+          <button type="button" (click)="filterBySubregion('North America', 'América do Norte')">América do Norte</button>
+          <button type="button" (click)="filterBySubregion('Central America', 'América Central')">América Central</button>
+          <button type="button" (click)="filterBySubregion('South America', 'América do Sul')">América do Sul</button>
+          <button type="button" (click)="filterBySubregion('Caribbean', 'Caribe')">Caribe</button>
 
-        <button type="button" (click)="filterBySubregion('North America', 'América do Norte')">América do Norte</button>
-        <button type="button" (click)="filterBySubregion('Central America', 'América Central')">América Central</button>
-        <button type="button" (click)="filterBySubregion('South America', 'América do Sul')">América do Sul</button>
-        <button type="button" (click)="filterBySubregion('Caribbean', 'Caribe')">Caribe</button>
+          <button type="button" (click)="filterBySubregion('Central Asia', 'Ásia Central')">Ásia Central</button>
+          <button type="button" (click)="filterBySubregion('Eastern Asia', 'Ásia Oriental')">Ásia Oriental</button>
+          <button type="button" (click)="filterBySubregion('South-Eastern Asia', 'Sudeste Asiático')">Sudeste Asiático</button>
+          <button type="button" (click)="filterBySubregion('Southern Asia', 'Sul da Ásia')">Sul da Ásia</button>
+          <button type="button" (click)="filterBySubregion('Western Asia', 'Oeste da Ásia')">Oeste da Ásia</button>
 
-        <button type="button" (click)="filterBySubregion('Central Asia', 'Ásia Central')">Ásia Central</button>
-        <button type="button" (click)="filterBySubregion('Eastern Asia', 'Ásia Oriental')">Ásia Oriental</button>
-        <button type="button" (click)="filterBySubregion('South-Eastern Asia', 'Sudeste Asiático')">Sudeste Asiático</button>
-        <button type="button" (click)="filterBySubregion('Southern Asia', 'Sul da Ásia')">Sul da Ásia</button>
-        <button type="button" (click)="filterBySubregion('Western Asia', 'Oeste da Ásia')">Oeste da Ásia</button>
+          <button type="button" (click)="filterBySubregion('Northern Europe', 'Europa Setentrional')">Europa Setentrional</button>
+          <button type="button" (click)="filterBySubregion('Western Europe', 'Europa Ocidental')">Europa Ocidental</button>
+          <button type="button" (click)="filterBySubregion('Southern Europe', 'Europa Meridional')">Europa Meridional</button>
+          <button type="button" (click)="filterBySubregion('Eastern Europe', 'Europa Oriental')">Europa Oriental</button>
 
-        <button type="button" (click)="filterBySubregion('Northern Europe', 'Europa Setentrional')">Europa Setentrional</button>
-        <button type="button" (click)="filterBySubregion('Western Europe', 'Europa Ocidental')">Europa Ocidental</button>
-        <button type="button" (click)="filterBySubregion('Southern Europe', 'Europa Meridional')">Europa Meridional</button>
-        <button type="button" (click)="filterBySubregion('Eastern Europe', 'Europa Oriental')">Europa Oriental</button>
+          <button type="button" (click)="filterBySubregion('Australia and New Zealand', 'Austrália e N. Zelândia')">Austrália e N. Zelândia</button>
+          <button type="button" (click)="filterBySubregion('Melanesia', 'Melanésia')">Melanésia</button>
+          <button type="button" (click)="filterBySubregion('Micronesia', 'Micronésia')">Micronésia</button>
+          <button type="button" (click)="filterBySubregion('Polynesia', 'Polinésia')">Polinésia</button>
+        </div>
+        <div class="mobile-panel-population">
+          <h3>População</h3>
 
-        <button type="button" (click)="filterBySubregion('Australia and New Zealand', 'Austrália e N. Zelândia')">Austrália e N. Zelândia</button>
-        <button type="button" (click)="filterBySubregion('Melanesia', 'Melanésia')">Melanésia</button>
-        <button type="button" (click)="filterBySubregion('Micronesia', 'Micronésia')">Micronésia</button>
-        <button type="button" (click)="filterBySubregion('Polynesia', 'Polinésia')">Polinésia</button>
-
-        <h3>População</h3>
-
-        <button type="button" (click)="filterByPopulation(0, 1000000, '< 1M')">&lt; 1M</button>
-        <button type="button" (click)="filterByPopulation(1000000, 10000000, '1M - 10M')">1M - 10M</button>
-        <button type="button" (click)="filterByPopulation(10000000, 100000000, '10M - 100M')">10M - 100M</button>
-        <button type="button" (click)="filterByPopulation(100000000, null, '> 100M')">&gt; 100M</button>
+          <button type="button" (click)="filterByPopulation(0, 1000000, '< 1M')">&lt; 1M</button>
+          <button type="button" (click)="filterByPopulation(1000000, 10000000, '1M - 10M')">1M - 10M</button>
+          <button type="button" (click)="filterByPopulation(10000000, 100000000, '10M - 100M')">10M - 100M</button>
+          <button type="button" (click)="filterByPopulation(100000000, null, '> 100M')">&gt; 100M</button>
+        </div>
       </div>
     }
 
