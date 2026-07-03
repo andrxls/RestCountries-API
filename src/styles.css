@@ -59,7 +59,7 @@ body {
     width: 200px;
     height: 34px;
     color: var(--text-main);
-    border: 0.5px solid var(--border-strong);
+    border: 0.5px solid var(--border);
     background-color: var(--bg-surface);
     border-radius: 8px;
     padding: 0 12px 0 34px;
@@ -80,7 +80,7 @@ body {
     padding: 0 14px;
     font-size: 13px;
     font-weight: 500;
-    border: 0.5px solid var(--border-strong);
+    border: 0.5px solid var(--border);
     border-radius: 8px;
     background: var(--bg-surface);
     color: var(--text-muted);
@@ -551,10 +551,10 @@ h2.vazio {
     .mobile-panel-header button {
         height: 32px;
         padding: 0 12px;
-        border: 0.5px solid var(--border);
+        border: 0.5px solid var(--border-strong);
         border-radius: 8px;
         background: var(--bg-surface);
-        color: var(--text-soft);
+        color: var(--text-muted);
     }
 
     .mobile-panel-content {
@@ -594,7 +594,7 @@ h2.vazio {
         border: 0.5px solid var(--border);
         border-radius: 9px;
         background: var(--bg-surface);
-        color: var(--text-soft);
+        color: var(--text-muted);
         font-size: 14px;
     }
 
@@ -682,4 +682,29 @@ h2.vazio {
     .mobile-actions button {
         font-size: 12px;
     }
+}
+
+@media (max-width: 1200px), (hover: none), (pointer: coarse) {
+  .nav button:hover {
+    background: var(--bg-surface);
+    color: var(--text-muted);
+    border-color: var(--border);
+  }
+
+  .mobile-panel-content button:hover {
+    background: var(--bg-surface);
+    color: var(--text-main);
+    border-color: var(--border);
+  }
+
+  .carregar-mais button:hover {
+    background: var(--bg-surface);
+    color: var(--text-muted);
+    border-color: var(--border-strong);
+  }
+
+  .caixa-pais:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }
