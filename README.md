@@ -51,7 +51,7 @@ cd RestCountries-API
 Instale as dependências:
 
 ```bash
-npm install
+npm ci
 ```
 
 Inicie o servidor de desenvolvimento:
