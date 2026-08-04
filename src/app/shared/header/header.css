@@ -1,88 +1,47 @@
 .header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--bg-surface);
-    border-bottom: 0.5px solid var(--border);
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  padding: 0 24px;
+  background: var(--bg-surface);
+  border-bottom: 0.5px solid var(--border);
 }
 
 .header-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .header-icon {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-    display: block;
-    flex-shrink: 0;
+  display: block;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
 h1 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--text-main);
-    text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--text-main);
+  text-align: center;
 }
 
-.nav {
-    position: sticky;
-    top: 64px;
-    z-index: 99;
-    background: #ffffff;
-    border-bottom: 0.5px solid #e0e0d8;
-    height: auto;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 6px 24px;
-    flex-wrap: wrap;
-}
+@media (max-width: 380px) {
+  h1 {
+    font-size: 17px;
+    letter-spacing: 1.5px;
+  }
 
-.nav input {
-    width: 200px;
-    height: 34px;
-    border: 0.5px solid #ccc;
-    border-radius: 8px;
-    padding: 0 12px 0 34px;
-    font-size: 13px;
-    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 10px center;
-    outline: none;
-    transition: border-color 0.15s;
+  .header-icon {
+    width: 26px;
+    height: 26px;
+  }
 }
-
-.nav input:focus {
-    border-color: #888;
-}
-
-.nav button {
-    height: 34px;
-    padding: 0 14px;
-    font-size: 13px;
-    font-weight: 500;
-    border: 0.5px solid #ccc;
-    border-radius: 8px;
-    background: #fff;
-    color: #444;
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
-    white-space: nowrap;
-}
-
-.nav button:hover {
-    background: #1a1a1a;
-    color: #fff;
-    border-color: #1a1a1a;
-}
-

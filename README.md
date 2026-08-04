@@ -165,8 +165,11 @@ Essa mudança tornou a experiência em dispositivos móveis mais clara e confort
 src/
   app/
     core/
+      models/
+        country.ts
       services/
         countries.ts
+        theme.ts
       utils/
         country-translations.ts
 

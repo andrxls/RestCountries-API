@@ -4,7 +4,7 @@ export const REGIONS: Record<string, string> = {
   Antarctic: 'Antártica',
   Asia: 'Ásia',
   Europe: 'Europa',
-  Oceania: 'Oceania'
+  Oceania: 'Oceania',
 };
 
 export const SUBREGIONS: Record<string, string> = {
@@ -33,7 +33,7 @@ export const SUBREGIONS: Record<string, string> = {
   'Australia and New Zealand': 'Austrália e Nova Zelândia',
   Melanesia: 'Melanésia',
   Micronesia: 'Micronésia',
-  Polynesia: 'Polinésia'
+  Polynesia: 'Polinésia',
 };
 
 export function translateRegion(region: string | null | undefined): string {

@@ -1,325 +1,231 @@
-<div class="nav">
+<nav class="nav" aria-label="Busca, filtros e ordenação">
   <div class="nav-search-area">
+    <label class="visually-hidden" for="busca">Buscar país</label>
     <input
-      type="text"
+      type="search"
       id="busca"
       placeholder="Buscar país..."
       [value]="searchTerm"
-      (input)="onSearch($any($event.target).value)"
-    >
+      (input)="onSearchInput($event)"
+    />
 
-    <button id="limpar" type="button" (click)="clearFilters()">
-      Resetar
-    </button>
+    <button id="limpar" type="button" (click)="clearFilters()">Resetar</button>
   </div>
 
   <div class="desktop-dropdowns">
-  <div class="dropdown">
-    <button type="button">
-      <span id="filtro-ativo">{{ activeFilterLabel || 'Filtrar' }}</span>
-    </button>
+    <div class="dropdown">
+      <button type="button" aria-haspopup="true">
+        <span>{{ activeFilterLabel || 'Filtrar' }}</span>
+      </button>
 
-    <div class="dropdown-content">
-      <div class="dropdown-content-inner">
+      <div class="dropdown-content">
+        <div class="dropdown-content-inner">
+          <div class="dropdown">
+            <button type="button" aria-haspopup="true">Região</button>
+            <div class="sub-dropdown">
+              <div class="dropdown-content-inner">
+                @for (region of regionOptions; track region.value) {
+                  <button type="button" (click)="filterByRegion(region.value, region.label)">
+                    {{ region.label }}
+                  </button>
+                }
+              </div>
+            </div>
+          </div>
 
-        <div class="dropdown">
-          <button type="button">Região</button>
+          <div class="dropdown">
+            <button type="button" aria-haspopup="true">Sub-região</button>
+            <div class="sub-dropdown">
+              <div class="dropdown-content-inner">
+                @for (group of subregionGroups; track group.label) {
+                  <div class="dropdown">
+                    <button type="button" aria-haspopup="true">{{ group.label }}</button>
+                    <div class="third-dropdown">
+                      <div class="dropdown-content-inner">
+                        @for (subregion of group.options; track subregion.value) {
+                          <button
+                            type="button"
+                            (click)="filterBySubregion(subregion.value, subregion.label)"
+                          >
+                            {{ subregion.label }}
+                          </button>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
 
-          <div class="sub-dropdown">
-            <div class="dropdown-content-inner">
-              <button type="button" (click)="filterByRegion('Africa', 'África')">África</button>
-              <button type="button" (click)="filterByRegion('Americas', 'Américas')">Américas</button>
-              <button type="button" (click)="filterByRegion('Antarctic', 'Antártica')">Antártica</button>
-              <button type="button" (click)="filterByRegion('Asia', 'Ásia')">Ásia</button>
-              <button type="button" (click)="filterByRegion('Europe', 'Europa')">Europa</button>
-              <button type="button" (click)="filterByRegion('Oceania', 'Oceania')">Oceania</button>
+          <div class="dropdown">
+            <button type="button" aria-haspopup="true">População</button>
+            <div class="sub-dropdown">
+              <div class="dropdown-content-inner">
+                @for (option of populationOptions; track option.label) {
+                  <button
+                    type="button"
+                    (click)="filterByPopulation(option.min, option.max, option.label)"
+                  >
+                    {{ option.label }}
+                  </button>
+                }
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="dropdown">
-          <button type="button">Sub-região</button>
-
-          <div class="sub-dropdown">
-            <div class="dropdown-content-inner">
-
-              <div class="dropdown">
-                <button type="button">África</button>
-                <div class="third-dropdown">
-                  <div class="dropdown-content-inner">
-                    <button type="button" (click)="filterBySubregion('Middle Africa', 'África Central')">África Central</button>
-                    <button type="button" (click)="filterBySubregion('Western Africa', 'África Ocidental')">África Ocidental</button>
-                    <button type="button" (click)="filterBySubregion('Eastern Africa', 'África Oriental')">África Oriental</button>
-                    <button type="button" (click)="filterBySubregion('Northern Africa', 'África Setentrional')">África Setentrional</button>
-                    <button type="button" (click)="filterBySubregion('Southern Africa', 'África Austral')">África Austral</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dropdown">
-                <button type="button">Américas</button>
-                <div class="third-dropdown">
-                  <div class="dropdown-content-inner">
-                    <button type="button" (click)="filterBySubregion('North America', 'América do Norte')">América do Norte</button>
-                    <button type="button" (click)="filterBySubregion('Central America', 'América Central')">América Central</button>
-                    <button type="button" (click)="filterBySubregion('South America', 'América do Sul')">América do Sul</button>
-                    <button type="button" (click)="filterBySubregion('Caribbean', 'Caribe')">Caribe</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dropdown">
-                <button type="button">Ásia</button>
-                <div class="third-dropdown">
-                  <div class="dropdown-content-inner">
-                    <button type="button" (click)="filterBySubregion('Central Asia', 'Ásia Central')">Ásia Central</button>
-                    <button type="button" (click)="filterBySubregion('Eastern Asia', 'Ásia Oriental')">Ásia Oriental</button>
-                    <button type="button" (click)="filterBySubregion('South-Eastern Asia', 'Sudeste Asiático')">Sudeste Asiático</button>
-                    <button type="button" (click)="filterBySubregion('Southern Asia', 'Sul da Ásia')">Sul da Ásia</button>
-                    <button type="button" (click)="filterBySubregion('Western Asia', 'Oeste da Ásia')">Oeste da Ásia</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dropdown">
-                <button type="button">Europa</button>
-                <div class="third-dropdown">
-                  <div class="dropdown-content-inner">
-                    <button type="button" (click)="filterBySubregion('Northern Europe', 'Europa Setentrional')">Europa Setentrional</button>
-                    <button type="button" (click)="filterBySubregion('Western Europe', 'Europa Ocidental')">Europa Ocidental</button>
-                    <button type="button" (click)="filterBySubregion('Southern Europe', 'Europa Meridional')">Europa Meridional</button>
-                    <button type="button" (click)="filterBySubregion('Eastern Europe', 'Europa Oriental')">Europa Oriental</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="dropdown">
-                <button type="button">Oceania</button>
-                <div class="third-dropdown">
-                  <div class="dropdown-content-inner">
-                    <button type="button" (click)="filterBySubregion('Australia and New Zealand', 'Austrália e N. Zelândia')">Austrália e N. Zelândia</button>
-                    <button type="button" (click)="filterBySubregion('Melanesia', 'Melanésia')">Melanésia</button>
-                    <button type="button" (click)="filterBySubregion('Micronesia', 'Micronésia')">Micronésia</button>
-                    <button type="button" (click)="filterBySubregion('Polynesia', 'Polinésia')">Polinésia</button>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <button type="button">População</button>
-          <div class="sub-dropdown">
-            <div class="dropdown-content-inner">
-              <button type="button" (click)="filterByPopulation(0, 1000000, '< 1M')">&lt; 1M</button>
-              <button type="button" (click)="filterByPopulation(1000000, 10000000, '1M - 10M')">1M - 10M</button>
-              <button type="button" (click)="filterByPopulation(10000000, 100000000, '10M - 100M')">10M - 100M</button>
-              <button type="button" (click)="filterByPopulation(100000000, null, '> 100M')">&gt; 100M</button>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
-  </div>
 
-  <div class="dropdown">
-    <button type="button">
-      <span id="ordenacao-ativa">{{ activeSortLabel || 'Ordenar' }}</span>
-    </button>
-
-    <div class="dropdown-content">
-      <div class="dropdown-content-inner">
-        <button type="button" (click)="sortBy('name-asc', 'Nome (A-Z)')">Nome (A-Z)</button>
-        <button type="button" (click)="sortBy('name-desc', 'Nome (Z-A)')">Nome (Z-A)</button>
-        <button type="button" (click)="sortBy('population-asc', 'População crescente')">População crescente</button>
-        <button type="button" (click)="sortBy('population-desc', 'População decrescente')">População decrescente</button>
-        <button type="button" (click)="sortBy('area-asc', 'Área crescente')">Área crescente</button>
-        <button type="button" (click)="sortBy('area-desc', 'Área decrescente')">Área decrescente</button>
+    <div class="dropdown">
+      <button type="button" aria-haspopup="true">
+        <span>{{ activeSortLabel || 'Ordenar' }}</span>
+      </button>
+      <div class="dropdown-content">
+        <div class="dropdown-content-inner">
+          @for (option of sortOptions; track option.value) {
+            <button type="button" (click)="sortBy(option.value, option.label)">
+              {{ option.label }}
+            </button>
+          }
+        </div>
       </div>
     </div>
+
+    <button
+      type="button"
+      class="theme-toggle"
+      (click)="toggleTheme()"
+      [attr.aria-label]="isDarkMode() ? 'Ativar modo claro' : 'Ativar modo escuro'"
+    >
+      @if (isDarkMode()) {
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <title>Ícone de sol</title>
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2 M12 20v2 M4.93 4.93l1.41 1.41 M17.66 17.66l1.41 1.41"></path>
+          <path d="M2 12h2 M20 12h2 M6.34 17.66l-1.41 1.41 M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <span>Claro</span>
+      } @else {
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <title>Ícone de lua</title>
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <span>Escuro</span>
+      }
+    </button>
   </div>
 
-  <button type="button" class="theme-toggle" (click)="toggleTheme()">
-  @if (isDarkMode) {
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="4"></circle>
-      <path d="M12 2v2"></path>
-      <path d="M12 20v2"></path>
-      <path d="m4.93 4.93 1.41 1.41"></path>
-      <path d="m17.66 17.66 1.41 1.41"></path>
-      <path d="M2 12h2"></path>
-      <path d="M20 12h2"></path>
-      <path d="m6.34 17.66-1.41 1.41"></path>
-      <path d="m19.07 4.93-1.41 1.41"></path>
-    </svg>
-    <span>Claro</span>
-  } @else {
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-    <span>Escuro</span>
-  }
-</button>
-</div>
-
-<div class="mobile-actions">
+  <div class="mobile-actions">
     <button type="button" (click)="openMobilePanel('filter')">
       {{ activeFilterLabel || 'Filtrar' }}
     </button>
-
     <button type="button" (click)="openMobilePanel('sort')">
       {{ activeSortLabel || 'Ordenar' }}
     </button>
-
-    <button type="button" class="theme-toggle" (click)="toggleTheme()">
-  @if (isDarkMode) {
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="4"></circle>
-      <path d="M12 2v2"></path>
-      <path d="M12 20v2"></path>
-      <path d="m4.93 4.93 1.41 1.41"></path>
-      <path d="m17.66 17.66 1.41 1.41"></path>
-      <path d="M2 12h2"></path>
-      <path d="M20 12h2"></path>
-      <path d="m6.34 17.66-1.41 1.41"></path>
-      <path d="m19.07 4.93-1.41 1.41"></path>
-    </svg>
-    <span>Claro</span>
-  } @else {
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-    <span>Escuro</span>
-  }
-</button>
-</div>
-</div>
+    <button
+      type="button"
+      class="theme-toggle"
+      (click)="toggleTheme()"
+      [attr.aria-label]="isDarkMode() ? 'Ativar modo claro' : 'Ativar modo escuro'"
+    >
+      {{ isDarkMode() ? 'Claro' : 'Escuro' }}
+    </button>
+  </div>
+</nav>
 
 @if (activeMobilePanel) {
-  <div class="mobile-panel-backdrop" (click)="closeMobilePanel()"></div>
+  <button
+    type="button"
+    class="mobile-panel-backdrop"
+    aria-label="Fechar painel"
+    (click)="closeMobilePanel()"
+  ></button>
 
-  <aside class="mobile-panel">
+  <aside class="mobile-panel" aria-modal="true" role="dialog">
     <div class="mobile-panel-header">
-      <h2>
-        @if (activeMobilePanel === 'filter') {
-          Filtrar países
-        } @else {
-          Ordenar países
-        }
-      </h2>
-
-      <button type="button" (click)="closeMobilePanel()">
-        Fechar
-      </button>
+      <h2>{{ activeMobilePanel === 'filter' ? 'Filtrar países' : 'Ordenar países' }}</h2>
+      <button type="button" (click)="closeMobilePanel()">Fechar</button>
     </div>
 
     @if (activeMobilePanel === 'filter') {
       <div class="mobile-panel-content">
         <div class="mobile-panel-region">
           <h3>Região</h3>
-
-          <button type="button" (click)="filterByRegion('Africa', 'África')">África</button>
-          <button type="button" (click)="filterByRegion('Americas', 'Américas')">Américas</button>
-          <button type="button" (click)="filterByRegion('Antarctic', 'Antártica')">Antártica</button>
-          <button type="button" (click)="filterByRegion('Asia', 'Ásia')">Ásia</button>
-          <button type="button" (click)="filterByRegion('Europe', 'Europa')">Europa</button>
-          <button type="button" (click)="filterByRegion('Oceania', 'Oceania')">Oceania</button>
+          @for (region of regionOptions; track region.value) {
+            <button type="button" (click)="filterByRegion(region.value, region.label)">
+              {{ region.label }}
+            </button>
+          }
         </div>
+
         <div class="mobile-panel-subregion">
           <h3>Sub-região</h3>
-
-          <button type="button" (click)="filterBySubregion('Middle Africa', 'África Central')">África Central</button>
-          <button type="button" (click)="filterBySubregion('Western Africa', 'África Ocidental')">África Ocidental</button>
-          <button type="button" (click)="filterBySubregion('Eastern Africa', 'África Oriental')">África Oriental</button>
-          <button type="button" (click)="filterBySubregion('Northern Africa', 'África Setentrional')">África Setentrional</button>
-          <button type="button" (click)="filterBySubregion('Southern Africa', 'África Austral')">África Austral</button>
-
-          <button type="button" (click)="filterBySubregion('North America', 'América do Norte')">América do Norte</button>
-          <button type="button" (click)="filterBySubregion('Central America', 'América Central')">América Central</button>
-          <button type="button" (click)="filterBySubregion('South America', 'América do Sul')">América do Sul</button>
-          <button type="button" (click)="filterBySubregion('Caribbean', 'Caribe')">Caribe</button>
-
-          <button type="button" (click)="filterBySubregion('Central Asia', 'Ásia Central')">Ásia Central</button>
-          <button type="button" (click)="filterBySubregion('Eastern Asia', 'Ásia Oriental')">Ásia Oriental</button>
-          <button type="button" (click)="filterBySubregion('South-Eastern Asia', 'Sudeste Asiático')">Sudeste Asiático</button>
-          <button type="button" (click)="filterBySubregion('Southern Asia', 'Sul da Ásia')">Sul da Ásia</button>
-          <button type="button" (click)="filterBySubregion('Western Asia', 'Oeste da Ásia')">Oeste da Ásia</button>
-
-          <button type="button" (click)="filterBySubregion('Northern Europe', 'Europa Setentrional')">Europa Setentrional</button>
-          <button type="button" (click)="filterBySubregion('Western Europe', 'Europa Ocidental')">Europa Ocidental</button>
-          <button type="button" (click)="filterBySubregion('Southern Europe', 'Europa Meridional')">Europa Meridional</button>
-          <button type="button" (click)="filterBySubregion('Eastern Europe', 'Europa Oriental')">Europa Oriental</button>
-
-          <button type="button" (click)="filterBySubregion('Australia and New Zealand', 'Austrália e N. Zelândia')">Austrália e N. Zelândia</button>
-          <button type="button" (click)="filterBySubregion('Melanesia', 'Melanésia')">Melanésia</button>
-          <button type="button" (click)="filterBySubregion('Micronesia', 'Micronésia')">Micronésia</button>
-          <button type="button" (click)="filterBySubregion('Polynesia', 'Polinésia')">Polinésia</button>
+          @for (subregion of subregionOptions; track subregion.value) {
+            <button type="button" (click)="filterBySubregion(subregion.value, subregion.label)">
+              {{ subregion.label }}
+            </button>
+          }
         </div>
+
         <div class="mobile-panel-population">
           <h3>População</h3>
-
-          <button type="button" (click)="filterByPopulation(0, 1000000, '< 1M')">&lt; 1M</button>
-          <button type="button" (click)="filterByPopulation(1000000, 10000000, '1M - 10M')">1M - 10M</button>
-          <button type="button" (click)="filterByPopulation(10000000, 100000000, '10M - 100M')">10M - 100M</button>
-          <button type="button" (click)="filterByPopulation(100000000, null, '> 100M')">&gt; 100M</button>
+          @for (option of populationOptions; track option.label) {
+            <button
+              type="button"
+              (click)="filterByPopulation(option.min, option.max, option.label)"
+            >
+              {{ option.label }}
+            </button>
+          }
         </div>
       </div>
-    }
-
-    @if (activeMobilePanel === 'sort') {
+    } @else {
       <div class="mobile-panel-content">
-        <button type="button" (click)="sortBy('name-asc', 'Nome (A-Z)')">Nome (A-Z)</button>
-        <button type="button" (click)="sortBy('name-desc', 'Nome (Z-A)')">Nome (Z-A)</button>
-        <button type="button" (click)="sortBy('population-asc', 'População crescente')">População crescente</button>
-        <button type="button" (click)="sortBy('population-desc', 'População decrescente')">População decrescente</button>
-        <button type="button" (click)="sortBy('area-asc', 'Área crescente')">Área crescente</button>
-        <button type="button" (click)="sortBy('area-desc', 'Área decrescente')">Área decrescente</button>
+        @for (option of sortOptions; track option.value) {
+          <button type="button" (click)="sortBy(option.value, option.label)">
+            {{ option.label }}
+          </button>
+        }
       </div>
     }
   </aside>
 }
 
-  @if (loading) {
-    <p class="status-message">Carregando países...</p>
-  }
-
-  @if (error) {
-    <p class="status-message error-message">{{ error }}</p>
-  }
-
-  @if (!loading && !error) {
-    <section class="paises">
-  @for (country of visibleCountries; track $index) {
-    <article class="caixa-pais" (click)="openCountryDetails(country)">
-        <img
-          [src]="country.flag?.url_png || country.flag?.url_svg || 'https://cdn-icons-png.flaticon.com/512/616/616616.png'" 
-          [alt]="country.flag?.description || country.names.common"
-        >
-
-      <h2>{{ country.names.common }}</h2>
-
-      <h3>
-        CAPITAL:
-        {{ country.capitals?.[0]?.name || 'N/A' }}
-      </h3>
-
-      <h3>
-        REGIÃO:
-        {{ translateRegion(country.region) || 'N/A' }}
-      </h3>
-
-      <p>Clique para mais informações</p>
-    </article>
-  } @empty {<h2 class="vazio">Nenhum país encontrado.</h2>}
-</section>
-@if (hasMoreCountries) {
-  <div class="carregar-mais">
-    <button type="button" (click)="loadMore()">
-      Carregar mais
-    </button>
-  </div>
+@if (loading) {
+  <p class="status-message" role="status">Carregando países...</p>
 }
+
+@if (error) {
+  <p class="status-message error-message" role="alert">{{ error }}</p>
+}
+
+@if (!loading && !error) {
+  <section class="paises" aria-label="Países encontrados">
+    @for (country of visibleCountries; track country.names.common) {
+      <a class="caixa-pais" [routerLink]="['/pais', country.names.common]">
+        <img
+          [src]="
+            country.flag?.url_png ||
+            country.flag?.url_svg ||
+            'https://cdn-icons-png.flaticon.com/512/616/616616.png'
+          "
+          alt="{{ country.flag?.description || 'Bandeira de ' + country.names.common }}"
+          title="Bandeira de {{ country.names.common }}"
+        />
+        <h2>{{ country.names.common }}</h2>
+        <h3>CAPITAL: {{ country.capitals?.[0]?.name || 'N/A' }}</h3>
+        <h3>REGIÃO: {{ translateRegion(country.region) }}</h3>
+        <p>Ver mais informações</p>
+      </a>
+    } @empty {
+      <h2 class="vazio">Nenhum país encontrado.</h2>
+    }
+  </section>
+
+  @if (hasMoreCountries) {
+    <div class="carregar-mais">
+      <button type="button" (click)="loadMore()">Carregar mais</button>
+    </div>
   }
+}

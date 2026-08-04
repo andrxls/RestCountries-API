@@ -1,85 +1,83 @@
-<div class="nav">
-  <button type="button" (click)="goBack()">Voltar</button>
-</div>
+<nav class="nav" aria-label="Navegação da página de detalhes">
+  <button type="button" class="back-button" (click)="goBack()">Voltar</button>
+</nav>
 
 @if (loading) {
-  <p>Carregando país...</p>
+  <p class="status-message" role="status">Carregando país...</p>
 }
 
 @if (error) {
-  <h2 class="vazio">{{ error }}</h2>
+  <h2 class="vazio" role="alert">{{ error }}</h2>
 }
 
 @if (!loading && !error && country) {
-  <div class="caixa-pais2">
-    <div id="pais-detalhes" (click)="goBack()">
+  <main class="caixa-pais2">
+    <section id="pais-detalhes" [attr.aria-labelledby]="'country-name'">
       <img
-        [src]="country.flag?.url_png || country.flag?.url_svg || 'https://cdn-icons-png.flaticon.com/512/616/616616.png'"
-        [alt]="country.flag?.description || 'Bandeira não disponível'"
-      >
+        [src]="country.flag?.url_png || country.flag?.url_svg || 'favicon.ico'"
+        [alt]="country.flag?.description || 'Bandeira de ' + country.names.common"
+        [title]="'Bandeira de ' + country.names.common"
+      />
 
-      <h4>{{ country.names?.common }}</h4>
+      <h2 id="country-name">{{ country.names.common }}</h2>
 
-      <h3>
-        <span>Nome oficial</span>
-        <span>{{ country.names?.official || 'N/A' }}</span>
-      </h3>
+      <dl class="country-facts">
+        <div>
+          <dt>Nome oficial</dt>
+          <dd>{{ country.names.official || 'N/A' }}</dd>
+        </div>
+        <div>
+          <dt>Nome em português</dt>
+          <dd>{{ country.names.translations?.por?.common || 'N/A' }}</dd>
+        </div>
+        <div>
+          <dt>Capital</dt>
+          <dd>{{ country.capitals?.[0]?.name || 'N/A' }}</dd>
+        </div>
+        <div>
+          <dt>Região</dt>
+          <dd>{{ translateRegion(country.region) }}</dd>
+        </div>
+        <div>
+          <dt>Sub-região</dt>
+          <dd>{{ translateSubregion(country.subregion) }}</dd>
+        </div>
+        <div>
+          <dt>População</dt>
+          <dd>{{ country.population ?? 'N/A' }}</dd>
+        </div>
+        <div>
+          <dt>Área</dt>
+          <dd>{{ country.area?.kilometers ?? 'N/A' }} km²</dd>
+        </div>
+        <div>
+          <dt>Idioma oficial</dt>
+          <dd>{{ country.languages?.[0]?.name || 'N/A' }}</dd>
+        </div>
+        <div>
+          <dt>Moeda</dt>
+          <dd>{{ country.currencies?.[0]?.name || 'N/A' }}</dd>
+        </div>
+        <div>
+          <dt>Fuso horário</dt>
+          <dd>{{ country.timezones?.join(', ') || 'N/A' }}</dd>
+        </div>
+        <div>
+          <dt>Domínio de internet</dt>
+          <dd>{{ country.tlds?.[0] || 'N/A' }}</dd>
+        </div>
+        <div>
+          <dt>Código de discagem</dt>
+          <dd>{{ country.calling_codes?.[0] || 'N/A' }}</dd>
+        </div>
+      </dl>
+    </section>
 
-      <h3>
-        <span>Nome em português</span>
-        <span>{{ country.names?.translations.por.common || 'N/A' }}</span>
-      </h3>
-
-      <h3>
-        <span>Capital</span>
-        <span>{{ country.capitals?.[0]?.name || 'N/A' }}</span>
-      </h3>
-
-      <h3>
-        <span>Região</span>
-        <span>{{ translateRegion(country.region) || 'N/A' }}</span>
-      </h3>
-
-      <h3>
-        <span>Sub-região</span>
-        <span>{{ translateSubregion(country.subregion) || 'N/A' }}</span>
-      </h3>
-
-      <h3>
-        <span>População</span>
-        <span>{{ country.population || 'N/A' }}</span>
-      </h3>
-
-      <h3>
-        <span>Área</span>
-        <span>{{ country.area.kilometers || 'N/A' }} km²</span>
-      </h3>
-
-      <h3>
-        <span>Idioma oficial</span>
-        <span>{{ country.languages?.[0]?.name || 'N/A' }}</span>
-      </h3>
-
-      <h3>
-        <span>Moeda</span>
-        <span>{{ country.currencies[0]?.name || 'N/A' }}</span>
-      </h3>
-
-      <h3>
-        <span>Fuso horário</span>
-        <span>{{ country.timezones?.join(', ') || 'N/A' }}</span>
-      </h3>
-
-      <h3>
-        <span>Domínio de internet</span>
-        <span>{{ country.tlds?.[0] || 'N/A' }}</span>
-      </h3>
-
-      <h3>
-        <span>Código de discagem</span>
-        <span>{{ country.calling_codes?.[0] || 'N/A' }}</span>
-      </h3>
-    </div>
-    <div id="mapa-pais"></div>
-  </div>
+    <div
+      #mapElement
+      id="mapa-pais"
+      role="region"
+      [attr.aria-label]="'Mapa de ' + country.names.common"
+    ></div>
+  </main>
 }

@@ -1,0 +1,134 @@
+.paises {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 24px;
+}
+
+.caixa-pais {
+  display: block;
+  overflow: hidden;
+  color: var(--text-main);
+  text-decoration: none;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.caixa-pais:focus-visible {
+  outline: 3px solid var(--text-main);
+  outline-offset: 3px;
+}
+
+.caixa-pais:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px var(--shadow);
+}
+
+.caixa-pais img {
+  display: block;
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.caixa-pais h2 {
+  padding: 12px 14px 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.caixa-pais h3 {
+  padding: 2px 14px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-soft);
+}
+
+.caixa-pais p {
+  padding: 8px 14px 12px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+.carregar-mais {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 32px;
+}
+
+.carregar-mais button {
+  height: 38px;
+  padding: 0 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  background: var(--bg-surface);
+  border: 0.5px solid var(--border-strong);
+  border-radius: 8px;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+}
+
+.carregar-mais button:hover {
+  color: var(--hover-text);
+  background: var(--hover-bg);
+  border-color: var(--hover-bg);
+}
+
+@media (max-width: 1200px) {
+  .paises {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 900px) {
+  .paises {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 700px) {
+  .paises {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    max-width: 380px;
+    margin: 20px auto;
+    padding: 0 16px;
+  }
+
+  .caixa-pais img {
+    height: 160px;
+  }
+}
+
+@media (max-width: 1200px), (hover: none), (pointer: coarse) {
+  .caixa-pais:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .carregar-mais button:hover {
+    color: var(--text-muted);
+    background: var(--bg-surface);
+    border-color: var(--border-strong);
+  }
+}

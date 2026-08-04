@@ -5,14 +5,14 @@ import { CountryDetails } from './pages/country-details/country-details';
 export const routes: Routes = [
   {
     path: '',
-    component: CountriesList
+    component: CountriesList,
   },
   {
     path: 'pais/:name',
-    component: CountryDetails
+    component: CountryDetails,
   },
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];
